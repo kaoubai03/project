@@ -1,0 +1,135 @@
+/* Base button styles */
+.button-base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+    outline: none;
+  }
+  
+  .button-base:focus {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  /* Button variants */
+  .button-primary {
+    background-color: #0d9488;
+    color: white;
+  }
+  
+  .button-primary:hover {
+    background-color: #0f766e;
+  }
+  
+  .button-primary:focus {
+    box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.5);
+  }
+  
+  .button-secondary {
+    background-color: #2563eb;
+    color: white;
+  }
+  
+  .button-secondary:hover {
+    background-color: #1d4ed8;
+  }
+  
+  .button-secondary:focus {
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.5);
+  }
+  
+  .button-outline {
+    border: 1px solid #d1d5db;
+    background-color: transparent;
+    color: #374151;
+  }
+  
+  .button-outline:hover {
+    background-color: #f9fafb;
+  }
+  
+  .button-outline:focus {
+    box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.5);
+  }
+  
+  .button-ghost {
+    background-color: transparent;
+    color: #374151;
+  }
+  
+  .button-ghost:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .button-ghost:focus {
+    box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.5);
+  }
+  
+  .button-danger {
+    background-color: #dc2626;
+    color: white;
+  }
+  
+  .button-danger:hover {
+    background-color: #b91c1c;
+  }
+  
+  .button-danger:focus {
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.5);
+  }
+  
+  /* Button sizes */
+  .button-sm {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .button-md {
+    font-size: 0.875rem;
+    padding: 0.625rem 1rem;
+  }
+  
+  .button-lg {
+    font-size: 1rem;
+    padding: 0.75rem 1.25rem;
+  }
+  
+  /* Button modifiers */
+  .button-full-width {
+    width: 100%;
+  }
+  
+  .button-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  /* Spinner styles */
+  .button-spinner {
+    animation: button-spin 1s linear infinite;
+    margin-right: 0.5rem;
+    height: 1rem;
+    width: 1rem;
+  }
+  
+  .spinner-circle {
+    opacity: 0.25;
+  }
+  
+  .spinner-path {
+    opacity: 0.75;
+  }
+  
+  @keyframes button-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Icon styles */
+  .button-icon {
+    margin-right: 0.5rem;
+  }

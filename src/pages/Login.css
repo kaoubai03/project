@@ -1,0 +1,135 @@
+.login-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 32px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .back-button {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 24px;
+  }
+  
+  .back-link {
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .back-link:hover {
+    color: #0d9488;
+  }
+  
+  .back-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .icon-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background-color: #f0fdfa;
+    border-radius: 9999px;
+    margin-bottom: 16px;
+  }
+  
+  .login-icon {
+    height: 24px;
+    width: 24px;
+    color: #0d9488;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 8px;
+  }
+  
+  .header p {
+    color: #6b7280;
+  }
+  
+  .error-message {
+    margin-bottom: 16px;
+    padding: 12px;
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    color: #dc2626;
+    font-size: 14px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .remember-me {
+    display: flex;
+    align-items: center;
+  }
+  
+  .remember-checkbox {
+    height: 16px;
+    width: 16px;
+    color: #0d9488;
+    border-color: #d1d5db;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+  
+  .remember-me label {
+    font-size: 14px;
+    color: #374151;
+  }
+  
+  .forgot-password a {
+    font-size: 14px;
+    color: #0d9488;
+    text-decoration: none;
+  }
+  
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+  
+  .submit-button {
+    padding-top: 8px;
+  }
+  
+  .signup-link {
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+    margin-top: 16px;
+  }
+  
+  .signup-link a {
+    color: #0d9488;
+    text-decoration: none;
+  }
+  
+  .signup-link a:hover {
+    text-decoration: underline;
+  }
