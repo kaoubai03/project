@@ -5,27 +5,43 @@ import UserTypeSelection from './pages/UserTypeSelection';
 import SignupPatient from './pages/SignupPatient';
 import SignupDoctor from './pages/SignupDoctor';
 import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
+import DashboardPatient from './pages/DashboardPatient';
+import DashboardMedecin from './pages/DashboardMedecin';
 import AuthLayout from './components/layouts/AuthLayout';
 import { UserProvider } from './context/UserContext';
+import ProfilMedical from './components/ProfilMedical';
+import RendezVous from './components/RendezVous';
+import Messagerie from './pages/Messagerie';
+import { MessageProvider } from './context/MessageContext';
 import './App.css';
 
 function App() {
   return (
     <UserProvider>
-      <div className="app-container">
-        <Routes>
-          <Route element={<AuthLayout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/user-type" element={<UserTypeSelection />} />
-            <Route path="/signup-patient" element={<SignupPatient />} />
-            <Route path="/signup-doctor" element={<SignupDoctor />} />
-            <Route path="/login" element={<Login />} />
-          </Route>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </div>
+      <MessageProvider>
+        <div className="app-container">
+          <Routes>
+            <Route element={<AuthLayout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/user-type" element={<UserTypeSelection mode="signup" />} />
+              <Route path="/signup-patient" element={<SignupPatient />} />
+              <Route path="/signup-doctor" element={<SignupDoctor />} />
+              <Route path="/login" element={<Navigate to="/login/selection" />} />
+              <Route path="/login/selection" element={<UserTypeSelection mode="login" />} />
+              <Route path="/login/:userType" element={<Login />} />
+            </Route>
+
+            {/* Dashboards séparés */}
+            <Route path="/dashboard/patient" element={<DashboardPatient />} />
+            <Route path="/dashboard/doctor" element={<DashboardMedecin />} />
+
+            <Route path="/profil-medical" element={<ProfilMedical />} />
+            <Route path="/rendez-vous" element={<RendezVous />} />
+            <Route path="/messagerie" element={<Messagerie />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </div>
+      </MessageProvider>
     </UserProvider>
   );
 }

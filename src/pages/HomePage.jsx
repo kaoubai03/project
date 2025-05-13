@@ -28,7 +28,7 @@ const HomePage = () => {
               Créer un compte
             </Button>
           </Link>
-          <Link to="/login">
+          <Link to="/login/selection">
             <Button 
               size="lg" 
               variant="outline" 

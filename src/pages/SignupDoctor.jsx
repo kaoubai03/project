@@ -97,7 +97,7 @@ const SignupDoctor = () => {
     
     try {
       await registerDoctor(formData);
-      navigate('/dashboard');
+      navigate('/dashboard/doctor');
     } catch (error) {
       console.error('Registration error:', error);
       setErrors({

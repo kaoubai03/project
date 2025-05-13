@@ -25,6 +25,7 @@ export const UserProvider = ({ children }) => {
       };
       
       setUser(mockUser);
+      return mockUser;
     } catch (error) {
       console.error('Login error:', error);
       throw error;
@@ -49,6 +50,7 @@ export const UserProvider = ({ children }) => {
       };
       
       setUser(mockUser);
+      return mockUser;  
     } catch (error) {
       console.error('Registration error:', error);
       throw error;
@@ -71,6 +73,7 @@ export const UserProvider = ({ children }) => {
       };
       
       setUser(mockUser);
+      return mockUser;
     } catch (error) {
       console.error('Registration error:', error);
       throw error;

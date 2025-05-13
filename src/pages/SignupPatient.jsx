@@ -82,7 +82,7 @@ const SignupPatient = () => {
     
     try {
       await registerPatient(formData);
-      navigate('/dashboard');
+      navigate('/dashboard/patient');
     } catch (error) {
       console.error('Registration error:', error);
       setErrors({
@@ -208,4 +208,4 @@ const SignupPatient = () => {
   );
 };
 
-export default SignupPatient;
+export default SignupPatient;      

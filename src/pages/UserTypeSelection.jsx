@@ -1,36 +1,36 @@
-import React, {useState } from 'react';
-import{Link, useNavigate} from 'react-router-dom';
-import { UserRound, Stethoscope, ArrowLeft }from 'lucide-react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserRound, Stethoscope, ArrowLeft } from 'lucide-react';
 import Button from '../components/ui/Button';
 import './UserTypeSelection.css';
 
-const UserTypeSelection = () => {
-    const navigate = useNavigate();
-    const [selectedType, setSelectedType] = useState(null);
+const UserTypeSelection = ({ mode }) => {
+  const navigate = useNavigate();
+  const [selectedType, setSelectedType] = useState(null);
 
-const handleContinue = () => {
-        if (selectedType === 'patient') {
-          navigate('/signup-patient');
-        } else if (selectedType === 'doctor') {
-          navigate('/signup-doctor');
-        }
-      };
+  const handleContinue = () => {
+    if (!selectedType) return;
 
-      return (
-        <div className="user-type-container">
-          <div className="back-button-container">
-            <Link to="/" className="back-link">
-              <ArrowLeft className="back-icon" />
-              <span className="back-text">Retour</span>
-            </Link>
-          </div>
+    if (mode === 'signup') {
+      navigate(selectedType === 'patient' ? '/signup-patient' : '/signup-doctor');
+    } else if (mode === 'login') {
+      navigate(`/login/${selectedType}`);
+    }
+  };
 
-          <h1 className="title">
-        Quel type d'utilisateur êtes-vous ?
-      </h1>
-      
+  return (
+    <div className="user-type-container">
+      <div className="back-button-container">
+        <Link to="/" className="back-link">
+          <ArrowLeft className="back-icon" />
+          <span className="back-text">Retour</span>
+        </Link>
+      </div>
+
+      <h1 className="title">Quel type d'utilisateur êtes-vous ?</h1>
+
       <div className="options-container">
-        <div 
+        <div
           className={`option-card ${selectedType === 'patient' ? 'selected' : ''}`}
           onClick={() => setSelectedType('patient')}
         >
@@ -40,12 +40,14 @@ const handleContinue = () => {
             </div>
             <h2 className="option-title">Patient</h2>
             <p className="option-description">
-              Je souhaite consulter un professionnel de santé et gérer mes rendez-vous.
+              {mode === 'signup'
+                ? 'Je souhaite consulter un professionnel de santé et gérer mes rendez-vous.'
+                : 'Je suis un patient existant et je veux me connecter.'}
             </p>
           </div>
         </div>
 
-        <div 
+        <div
           className={`option-card ${selectedType === 'doctor' ? 'selected' : ''}`}
           onClick={() => setSelectedType('doctor')}
         >
@@ -55,18 +57,16 @@ const handleContinue = () => {
             </div>
             <h2 className="option-title">Médecin</h2>
             <p className="option-description">
-              Je suis un professionnel de santé et souhaite gérer mes patients.
+              {mode === 'signup'
+                ? 'Je suis un professionnel de santé et je souhaite m’inscrire.'
+                : 'Je suis déjà médecin et je veux me connecter.'}
             </p>
           </div>
         </div>
       </div>
 
       <div className="button-container">
-        <Button
-          onClick={handleContinue}
-          disabled={!selectedType}
-          fullWidth
-        >
+        <Button onClick={handleContinue} disabled={!selectedType} fullWidth>
           Continuer
         </Button>
       </div>
