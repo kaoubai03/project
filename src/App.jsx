@@ -10,7 +10,8 @@ import DashboardMedecin from './pages/DashboardMedecin';
 import AuthLayout from './components/layouts/AuthLayout';
 import { UserProvider } from './context/UserContext';
 import ProfilMedical from './components/ProfilMedical';
-import RendezVous from './components/RendezVous';
+import RendezVousP from './pages/RendezVousP';
+import RendezVousM from './pages/RendezVousM';
 import Messagerie from './pages/Messagerie';
 import { MessageProvider } from './context/MessageContext';
 import './App.css';
@@ -32,12 +33,18 @@ function App() {
             </Route>
 
             {/* Dashboards séparés */}
-            <Route path="/dashboard/patient" element={<DashboardPatient />} />
-            <Route path="/dashboard/doctor" element={<DashboardMedecin />} />
+            <Route path="/dashboard/patient" element={<DashboardPatient />}>
+              <Route path= "rendez-vous" element={<RendezVousP />} />
+            </Route>
+            <Route path="/dashboard/doctor" element={<DashboardMedecin />}>
+            
+            </Route>
 
             <Route path="/profil-medical" element={<ProfilMedical />} />
-            <Route path="/rendez-vous" element={<RendezVous />} />
+            <Route path="/rendez-vous" element={<RendezVousP />} />
+            
             <Route path="/messagerie" element={<Messagerie />} />
+           
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
