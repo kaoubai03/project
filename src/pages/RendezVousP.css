@@ -1,31 +1,12 @@
-:root {
-  --primary: #3b82f6;
-  --primary-hover: #2563eb;
-  --success: #10b981;
-  --success-hover: #0d9c6e;
-  --danger: #ef4444;
-  --danger-hover: #dc2626;
-  --warning: #f59e0b;
-  --warning-hover: #d97706;
-  --gray-light: #e2e8f0;
-  --gray-medium: #94a3b8;
-  --gray-dark: #64748b;
-  --text-dark: #1e293b;
-  --bg-light: #f8fafc;
-  --white: #ffffff;
-  --border-radius: 8px;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --transition: all 0.2s ease;
-}
+
 
 /* Base Styles */
 .rendezvous-container {
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  color: var(--text-dark);
+  padding: 2rem;
+  background-color: var(--bg-light);
 }
 
 /* Header */
@@ -35,7 +16,8 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 2rem;
+   max-width: none;
+  width: 100%;
 }
 
 .rv-header h1 {
@@ -52,7 +34,7 @@
   align-items: center;
   gap: 0.5rem;
   background-color: var(--primary);
-  color: var(--white);
+  color: var(--secondary);
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: var(--border-radius);
@@ -64,6 +46,7 @@
 
 .create-button:hover {
   background-color: var(--primary-hover);
+  box-shadow: var(--shadow-md);
 }
 
 .create-button:disabled {
@@ -73,29 +56,31 @@
 
 /* Search and Create Container */
 .search-create-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
   margin-bottom: 2rem;
+  overflow: hidden;
 }
 
 /* Search Box */
 .search-box {
-  display: flex;
-  align-items: center;
-  background-color: var(--bg-light);
-  border-radius: var(--border-radius);
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--gray-light);
+position: relative;
 }
 
 .search-box input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  margin-left: 0.5rem;
-  outline: none;
-  font-size: 1rem;
+  width: 100%;
+  padding: 0.75rem 2.5rem;
+  border: 1px solid var(--gray-light);
+  border-radius: var(--border-radius);
+}
+
+.search-box svg {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
 }
 
 /* Filter Dropdown */
@@ -192,8 +177,8 @@
 }
 
 .confirm-btn {
-  background-color: var(--success);
-  color: var(--white);
+  background-color: rgb(85, 151, 237);
+  color: var(--secondary);
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: var(--border-radius);
@@ -256,15 +241,19 @@
 }
 
 .appointment-card {
-  background-color: var(--white);
-  border-radius: 12px;
+  background: var(--white);
+  border-radius: var(--border-radius);
   padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
-  border-left: 4px solid var(--gray-light);
+  margin-bottom: 1rem;
+  border-left: 4px solid transparent;
   transition: var(--transition);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
 }
 
 .appointment-card:hover {
+  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
@@ -401,13 +390,11 @@
 
 /* Empty State */
 .empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem;
   text-align: center;
-  color: var(--gray-dark);
+  padding: 4rem;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
 }
 
 .empty-state h3 {
@@ -430,8 +417,8 @@
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Responsive Design */
@@ -471,22 +458,5 @@
 
 
 
-@media (max-width: 1024px) {
-  .tabs {
-    overflow-x: auto;
-    padding-bottom: 4px;
-  }
 
-  .tabs button {
-    padding: 0.75rem 1rem;
-    font-size: 0.875rem;
-  }
-
-    .menu-toggle {
-    display: block;
-  }
-  
-  .sidebar.open + .dashboard-overlay {
-    display: block;
-  }
-}
+ 

@@ -1,24 +1,12 @@
-:root {
-  --primary: #3b82f6;
-  --primary-light: #93c5fd;
-  --primary-dark: #1d4ed8;
-  --secondary: #10b981;
+/*:root {
   --accent: #ec4899;
-  --danger: #ef4444;
-  --dark: #1e293b;
-  --light: #f8fafc;
-  --gray: #64748b;
-  --light-gray: #e2e8f0;
-  --white: #ffffff;
-  --sidebar-width: 280px;
-  --border-radius: 10px;
+  --secondary: #10b981;
+  --support: #8b5cf6;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+}*/
 
-/* Reset et Base */
+/* Reset & Base */
 * {
   margin: 0;
   padding: 0;
@@ -32,148 +20,10 @@ body {
   line-height: 1.5;
 }
 
-/* Layout Principal */
 .dashboard {
   display: flex;
   min-height: 100vh;
   position: relative;
-}
-
-/* Sidebar */
-.sidebar {
-  width: var(--sidebar-width);
-  background: var(--white);
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: -100%;
-  z-index: 100;
-  border-right: 1px solid var(--light-gray);
-  box-shadow: var(--shadow-md);
-  transition: var(--transition);
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar.open {
-  left: 0;
-}
-
-.sidebar-header {
-  padding: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--light-gray);
-}
-
-.clinic-logo {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--dark);
-}
-
-.clinic-logo span {
-  color: var(--primary);
-}
-
-.close-sidebar {
-  background: none;
-  border: none;
-  color: var(--gray);
-  cursor: pointer;
-  padding: 0.25rem;
-  border-radius: 6px;
-  transition: var(--transition);
-}
-
-.close-sidebar:hover {
-  background: var(--light-gray);
-  color: var(--dark);
-}
-
-.sidebar-nav {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 0;
-  overflow-y: auto;
-}
-
-.sidebar-nav ul {
-  list-style: none;
-  flex: 1;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 1.5rem;
-  color: var(--gray);
-  text-decoration: none;
-  transition: var(--transition);
-  position: relative;
-}
-
-.nav-link:hover {
-  color: var(--primary);
-  background-color: rgba(59, 130, 246, 0.05);
-}
-
-.nav-link.active {
-  color: var(--primary);
-  background-color: rgba(59, 130, 246, 0.1);
-  font-weight: 500;
-}
-
-.nav-link.active::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 3px;
-  background-color: var(--primary);
-}
-
-.nav-icon {
-  margin-right: 1rem;
-  color: var(--gray);
-}
-
-.nav-link:hover .nav-icon,
-.nav-link.active .nav-icon {
-  color: var(--primary);
-}
-
-.nav-text {
-  font-size: 0.9375rem;
-  font-weight: 500;
-}
-
-/* Section Déconnexion */
-.logout-section {
-  margin-top: auto;
-  padding: 1rem 0;
-  border-top: 1px solid var(--light-gray);
-}
-
-.logout-link {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 1.5rem;
-  color: var(--gray);
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-.logout-link:hover {
-  color: var(--danger);
-  background-color: rgba(239, 68, 68, 0.05);
-}
-
-.logout-link:hover .nav-icon {
-  color: var(--danger);
 }
 
 /* Main Content */
@@ -198,21 +48,6 @@ body {
   justify-content: space-between;
   align-items: center;
   box-shadow: var(--shadow-sm);
-}
-
-.menu-toggle {
-  background: none;
-  border: none;
-  color: var(--gray);
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: var(--border-radius);
-  transition: var(--transition);
-}
-
-.menu-toggle:hover {
-  background: var(--light-gray);
-  color: var(--dark);
 }
 
 .user-profile {
@@ -326,7 +161,7 @@ body {
   border-bottom: 1px solid var(--light-gray);
 }
 
-/* Grille de Fonctionnalités */
+/* Grille Fonctionnalités */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -379,7 +214,6 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* Carte de Support Spéciale */
 .feature-card.support-card {
   border-top: 4px solid var(--support);
 }
@@ -389,7 +223,7 @@ body {
   color: var(--support);
 }
 
-/* Boutons d'Action */
+/* Action */
 .card-action {
   display: inline-flex;
   align-items: center;
@@ -423,27 +257,17 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
-  .sidebar.open + .main-content {
-    transform: translateX(var(--sidebar-width));
-  }
-}
-
 @media (max-width: 768px) {
   .dashboard-content {
     padding: 1.5rem;
   }
-  
+
   .stats-grid {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   .features-grid {
     grid-template-columns: 1fr;
-  }
-  
-  .sidebar.open ~ .dashboard-overlay {
-    display: block;
   }
 }
 
@@ -451,11 +275,11 @@ body {
   .stats-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .top-bar {
     padding: 1rem;
   }
-  
+
   .welcome-banner h2 {
     font-size: 1.5rem;
   }

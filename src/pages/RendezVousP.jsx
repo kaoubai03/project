@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SidebarP from '../components/layouts/sidebarP';
 import { 
   Search,
   PlusCircle,
@@ -13,18 +14,8 @@ import {
   Filter,
   ChevronDown,
   Loader2,
-  Menu,
-  X,
-  Home,
-  CheckCircle2,
-  FileText,
-  Notebook,
-  MessageSquare,
-  ChevronRight,
-  Settings,
-  HelpCircle,
-  Stethoscope,
-  LogOut
+  Menu
+  
 } from 'lucide-react';
 import './RendezVousP.css';
 
@@ -51,16 +42,7 @@ const RendezVousP = () => {
   const closeSidebar = () => setSidebarOpen(false);
 
   // Menu items pour la sidebar
-  const menuItems = [
-    { icon: <Home size={20} />, text: "Accueil", path: "/dashboard/patient" },
-    { icon: <User size={20} />, text: "Profil", path: "/profile" },
-    { icon: <Calendar size={20} />, text: "Rendez-vous", path: "/rendez-vous" },
-    { icon: <FileText size={20} />, text: "Documents", path: "/ordonnance" },
-    { icon: <Notebook size={20} />, text: "Historique", path: "/carnet" },
-    { icon: <MessageSquare size={20} />, text: "Messagerie", path: "/messagerie" },
-    { icon: <HelpCircle size={20} />, text: "Support", path: "/support" },
-    { icon: <Settings size={20} />, text: "Paramètres", path: "/settings" }
-  ];
+  
 
   // Données simulées (remplacer par appel API en production)
   const specialites = [
@@ -170,73 +152,32 @@ const RendezVousP = () => {
 
   return (
     <div className="rendezvous-container">
-              {/* Ajout de la Sidebar */}
-      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <div className="sidebar-header">
-          <div className="clinic-logo">
-            <span>Espace</span>Patient
-          </div>
-          <button className="close-sidebar" onClick={closeSidebar}>
-            <X size={20} />
-          </button>
-        </div>
-        
-        <nav className="sidebar-nav">
-          <ul>
-            {menuItems.map((item, index) => (
-              <li key={index}>
-                <Link 
-                  to={item.path} 
-                  className={`nav-link ${activeIcon === index ? 'active' : ''}`}
-                  onClick={() => {
-                    setActiveIcon(index);
-                    closeSidebar();
-                  }}
-                >
-                  <span className="nav-icon">{item.icon}</span>
-                  <span className="nav-text">{item.text}</span>
-                  <ChevronRight size={16} className="nav-chevron" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-          
-          {/* Bouton Déconnexion */}
-          <div className="logout-section">
-            <Link 
-              to="/" 
-              className="logout-link"
-              onClick={() => {
-                // Ajoutez ici la logique de déconnexion
-                closeSidebar();
-              }}
-            >
-              <span className="nav-icon"><LogOut size={20} /></span>
-              <span className="nav-text">Déconnexion</span>
-            </Link>
-          </div>
-        </nav>
-      </aside>
+      <SidebarP 
+       sidebarOpen={sidebarOpen}
+       toggleSidebar={toggleSidebar}
+       closeSidebar={closeSidebar}
+       activeIcon={activeIcon}
+       setActiveIcon={setActiveIcon}
+      />
 
       {/* Overlay pour mobile */}
       {sidebarOpen && <div className="dashboard-overlay" onClick={closeSidebar}></div>}
 
       {/* Modification du header pour inclure le menu toggle */}
-      <header className="rv-header">
-              <header className="rv-header">
-        <button className="menu-toggle" onClick={toggleSidebar}>
-          <Menu size={24} />
-        </button>
-      </header>
-     {/*finsidebar*/}
-        <h1>{/*<Calendar size={28} />*/}Rendez-vous</h1>
+          <div className="main-content">
+            <header className="top-bar">
+              <button className="menu-toggle" onClick={toggleSidebar}>
+                <Menu size={24} />
+              </button>
+     
+        <h1>Rendez-vous</h1>
         <button 
           className="create-button"
           onClick={() => setShowCreateForm(!showCreateForm)}
           disabled={loading}
         >
           {loading ? <Loader2 className="spin-icon" size={18} /> : <PlusCircle size={18} />}
-          {showCreateForm ? 'Masquer le formulaire' : 'Nouveau rendez-vous'}
+          {showCreateForm ? 'Masquer' : 'Nouveau rendez-vous'}
         </button>
       </header>
 
@@ -252,6 +193,9 @@ const RendezVousP = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
+          
+          
+          
           
           <form onSubmit={handleCreateAppointment} className="create-form">
             <h3>Prendre un nouveau rendez-vous</h3>
@@ -330,6 +274,7 @@ const RendezVousP = () => {
               <button 
                 type="submit" 
                 className="confirm-btn"
+                
                 disabled={loading}
               >
                 {loading ? <Loader2 className="spin-icon" size={16} /> : 'Confirmer le rendez-vous'}
@@ -472,6 +417,7 @@ const RendezVousP = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };

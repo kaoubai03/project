@@ -12,7 +12,8 @@ import { UserProvider } from './context/UserContext';
 import ProfilMedical from './components/ProfilMedical';
 import RendezVousP from './pages/RendezVousP';
 import RendezVousM from './pages/RendezVousM';
-import Messagerie from './pages/Messagerie';
+import Messagerie from './pages/MessagerieM';
+import MessagerieP from './pages/MessagerieP';
 import { MessageProvider } from './context/MessageContext';
 import './App.css';
 
@@ -34,16 +35,19 @@ function App() {
 
             {/* Dashboards séparés */}
             <Route path="/dashboard/patient" element={<DashboardPatient />}>
-              <Route path= "rendez-vous" element={<RendezVousP />} />
+              <Route path= "rendez-vousP" element={<RendezVousP />} />
+              <Route path="MessagerieP" element={<MessagerieP />} />
             </Route>
             <Route path="/dashboard/doctor" element={<DashboardMedecin />}>
-            
+              <Route path= "rendez-vousM" element={<RendezVousM />} />
+              <Route path="MessagerieM" element={<Messagerie />} />
             </Route>
 
             <Route path="/profil-medical" element={<ProfilMedical />} />
-            <Route path="/rendez-vous" element={<RendezVousP />} />
-            
-            <Route path="/messagerie" element={<Messagerie />} />
+            <Route path="/rendez-vousP" element={<RendezVousP />} />
+            <Route path= "/rendez-vousM" element={<RendezVousM />} />
+            <Route path="/MessagerieM" element={<Messagerie />} />
+            <Route path="/MessagerieP" element={<MessagerieP />} />
            
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

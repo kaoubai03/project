@@ -1,0 +1,482 @@
+/* Container spécifique à la messagerie patient */
+.messagerie-patient-container {
+  --mp-primary: #3498db;
+  --mp-primary-dark: #2980b9;
+  --mp-success: #2ecc71;
+  --mp-danger: #e74c3c;
+  --mp-warning: #f39c12;
+  --mp-text-dark: #2c3e50;
+  --mp-text-light: #7f8c8d;
+  --mp-bg-light: #f8f9fa;
+  --mp-border-color: #e0e0e0;
+  --mp-shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --mp-shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --mp-border-radius: 8px;
+  --mp-transition: all 0.2s ease;
+
+  display: flex;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Sidebar conversations */
+.messagerie-patient-container .conversations-sidebar {
+  width: 350px;
+  border-right: 1px solid var(--mp-border-color);
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+/* Header */
+.messagerie-patient-container .sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--mp-border-color);
+}
+
+.messagerie-patient-container .sidebar-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--mp-text-dark);
+}
+
+.messagerie-patient-container .notification-badge {
+  position: relative;
+  cursor: pointer;
+}
+
+.messagerie-patient-container .notification-badge span {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--mp-danger);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+/* Search bar */
+.messagerie-patient-container .search-bar {
+  padding: 1rem;
+  position: relative;
+}
+
+.messagerie-patient-container .search-bar input {
+  width: 100%;
+  padding: 0.7rem 1rem 0.7rem 2.5rem;
+  border: 1px solid var(--mp-border-color);
+  border-radius: 20px;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.messagerie-patient-container .search-bar svg {
+  position: absolute;
+  left: 1.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--mp-text-light);
+}
+
+/* Conversations list */
+.messagerie-patient-container .conversations-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.messagerie-patient-container .conversation-item {
+  display: flex;
+  padding: 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--mp-border-color);
+  transition: var(--mp-transition);
+  position: relative;
+}
+
+.messagerie-patient-container .conversation-item:hover {
+  background-color: var(--mp-bg-light);
+}
+
+.messagerie-patient-container .conversation-item.active {
+  background-color: #e8f4fd;
+}
+
+.messagerie-patient-container .conversation-item.unread {
+  background-color: #f8f9fa;
+}
+
+/* Doctor avatar */
+.messagerie-patient-container .doctor-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--mp-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.messagerie-patient-container .conversation-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.messagerie-patient-container .doctor-name {
+  font-weight: 600;
+  color: var(--mp-text-dark);
+  margin-bottom: 0.2rem;
+}
+
+.messagerie-patient-container .doctor-specialty {
+  font-size: 0.8rem;
+  color: var(--mp-primary);
+  margin-bottom: 0.3rem;
+}
+
+.messagerie-patient-container .last-message {
+  font-size: 0.9rem;
+  color: var(--mp-text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.messagerie-patient-container .conversation-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: 0.5rem;
+}
+
+.messagerie-patient-container .last-time {
+  font-size: 0.8rem;
+  color: var(--mp-text-light);
+  white-space: nowrap;
+}
+
+.messagerie-patient-container .last-date {
+  font-size: 0.7rem;
+  color: #95a5a6;
+  margin-top: 0.2rem;
+}
+
+.messagerie-patient-container .unread-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--mp-primary);
+  border-radius: 50%;
+  margin-top: 0.3rem;
+}
+
+/* Chat container */
+.messagerie-patient-container .chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--mp-bg-light);
+}
+
+.messagerie-patient-container .chat-header {
+  padding: 1rem 1.5rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--mp-border-color);
+  box-shadow: var(--mp-shadow-sm);
+}
+
+.messagerie-patient-container .doctor-info {
+  display: flex;
+  align-items: center;
+}
+
+.messagerie-patient-container .doctor-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--mp-text-dark);
+}
+
+.messagerie-patient-container .doctor-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--mp-text-light);
+}
+
+/* Messages container */
+.messagerie-patient-container .messages-container {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  background-color: var(--mp-bg-light);
+}
+
+.messagerie-patient-container .message-date {
+  text-align: center;
+  margin: 1.5rem 0;
+  color: var(--mp-text-light);
+  font-size: 0.8rem;
+  position: relative;
+}
+
+.messagerie-patient-container .message-date::before,
+.messagerie-patient-container .message-date::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background-color: var(--mp-border-color);
+}
+
+.messagerie-patient-container .message-date::before {
+  left: 0;
+}
+
+.messagerie-patient-container .message-date::after {
+  right: 0;
+}
+
+/* Messages */
+.messagerie-patient-container .message {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.messagerie-patient-container .message.patient {
+  justify-content: flex-end;
+}
+
+.messagerie-patient-container .message.doctor {
+  justify-content: flex-start;
+}
+
+.messagerie-patient-container .message-content {
+  max-width: 70%;
+  padding: 0.8rem 1rem;
+  border-radius: var(--mp-border-radius);
+  position: relative;
+}
+
+.messagerie-patient-container .message.patient .message-content {
+  background-color: var(--mp-primary);
+  color: white;
+  border-bottom-right-radius: 0;
+}
+
+.messagerie-patient-container .message.doctor .message-content {
+  background-color: #ffffff;
+  color: var(--mp-text-dark);
+  border-bottom-left-radius: 0;
+  box-shadow: var(--mp-shadow-sm);
+}
+
+.messagerie-patient-container .message-time {
+  font-size: 0.7rem;
+  text-align: right;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+
+.messagerie-patient-container .message.patient .message-time {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.messagerie-patient-container .message.doctor .message-time {
+  color: var(--mp-text-light);
+}
+
+/* Attachments */
+.messagerie-patient-container .attachment {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.messagerie-patient-container .attachment-icon {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: var(--mp-border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.messagerie-patient-container .message.doctor .attachment-icon {
+  background-color: #f1f1f1;
+}
+
+.messagerie-patient-container .attachment-info {
+  flex: 1;
+}
+
+.messagerie-patient-container .attachment-name {
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.messagerie-patient-container .attachment-size {
+  font-size: 0.8rem;
+  color: var(--mp-text-light);
+  margin-bottom: 0.5rem;
+}
+
+.messagerie-patient-container .download-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.3rem 0;
+}
+
+.messagerie-patient-container .message.doctor .download-btn {
+  color: var(--mp-primary);
+}
+
+.messagerie-patient-container .download-btn:hover {
+  text-decoration: underline;
+}
+
+/* Message input */
+.messagerie-patient-container .message-input-container {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-top: 1px solid var(--mp-border-color);
+}
+
+.messagerie-patient-container .message-input-container textarea {
+  flex: 1;
+  border: 1px solid var(--mp-border-color);
+  border-radius: 20px;
+  padding: 0.8rem 1rem;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  max-height: 120px;
+  margin: 0 0.5rem;
+}
+
+.messagerie-patient-container .attachment-btn {
+  background: none;
+  border: none;
+  color: var(--mp-text-light);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: var(--mp-transition);
+}
+
+.messagerie-patient-container .attachment-btn:hover {
+  background-color: #f1f1f1;
+  color: var(--mp-text-dark);
+}
+
+.messagerie-patient-container .send-btn {
+  background-color: var(--mp-primary);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--mp-transition);
+}
+
+.messagerie-patient-container .send-btn:hover {
+  background-color: var(--mp-primary-dark);
+}
+
+.messagerie-patient-container .send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* No conversation selected */
+.messagerie-patient-container .no-conversation-selected {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--mp-text-light);
+  padding: 2rem;
+}
+
+.messagerie-patient-container .no-conversation-selected h3 {
+  margin: 1rem 0 0.5rem;
+  color: var(--mp-text-dark);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .messagerie-patient-container .conversations-sidebar {
+    width: 300px;
+  }
+  
+  .messagerie-patient-container .message-content {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .messagerie-patient-container {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .messagerie-patient-container .conversations-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--mp-border-color);
+    height: 400px;
+  }
+  
+  .messagerie-patient-container .chat-container {
+    height: calc(100vh - 400px);
+  }
+}
+
+@media (max-width: 576px) {
+  .messagerie-patient-container .conversation-item {
+    padding: 0.8rem;
+  }
+  
+  .messagerie-patient-container .doctor-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+  
+  .messagerie-patient-container .message-content {
+    max-width: 90%;
+  }
+  
+  .messagerie-patient-container .attachment {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,21 +1,8 @@
+// DashboardPatient.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Menu, 
-  User, 
-  Calendar, 
-  CheckCircle2, 
-  FileText, 
-  Notebook, 
-  MessageSquare,
-  ChevronRight,
-  X,
-  Home,
-  Settings,
-  HelpCircle,
-  Stethoscope,
-  LogOut
-} from 'lucide-react';
+import { Menu, User, Calendar, FileText, Notebook, MessageSquare, ChevronRight, CheckCircle2, HelpCircle, Stethoscope } from 'lucide-react';
+import SidebarP from '../components/layouts/sidebarP';
 import './DashboardPatient.css';
 
 const DashboardPatient = () => {
@@ -25,66 +12,65 @@ const DashboardPatient = () => {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);
 
-  const menuItems = [
-    { icon: <Home size={20} />, text: "Accueil", path: "/dashboard/patient" },
-    { icon: <User size={20} />, text: "Profil", path: "/profile" },
-    { icon: <Calendar size={20} />, text: "Rendez-vous", path: "/rendez-vous" }, // Modifié pour correspondre à la nouvelle route
-    { icon: <FileText size={20} />, text: "Documents", path: "/ordonnance" },
-    { icon: <Notebook size={20} />, text: "Historique", path: "/carnet" },
-    { icon: <MessageSquare size={20} />, text: "Messagerie", path: "/messagerie" },
-    { icon: <HelpCircle size={20} />, text: "Support", path: "/support" },
-    { icon: <Settings size={20} />, text: "Paramètres", path: "/settings" }
-  ];
-
   const profileCards = [
-    { icon: <User size={24} />, title: "Informations Personnelles", 
-      description: "Mettez à jour vos coordonnées et informations de contact", path: "/profile/personal", btnText: "Modifier" },
-    { icon: <Stethoscope size={24} />, title: "Profil Médical", 
-      description: "Gérez vos antécédents médicaux et traitements", path: "/profile/medical", btnText: "Compléter" }
+    {
+      icon: <User size={24} />,
+      title: "Informations Personnelles",
+      description: "Mettez à jour vos coordonnées et informations de contact",
+      path: "/profile/personal",
+      btnText: "Modifier"
+    },
+    {
+      icon: <Stethoscope size={24} />,
+      title: "Profil Médical",
+      description: "Gérez vos antécédents médicaux et traitements",
+      path: "/profile/medical",
+      btnText: "Compléter"
+    }
   ];
 
   const featureCards = [
-    { 
-      icon: <Calendar size={24} />, 
-      title: "Gestion des Rendez-vous", 
-      description: "Prenez et gérez vos rendez-vous en ligne", 
-      path: "/rendez-vous", // Modifié pour correspondre à la nouvelle route
-      btnText: "Accéder" 
+    {
+      icon: <Calendar size={24} />,
+      title: "Gestion des Rendez-vous",
+      description: "Prenez et gérez vos rendez-vous en ligne",
+      path: "/rendez-vousP",
+      btnText: "Accéder"
     },
-    { 
-      icon: <CheckCircle2 size={24} />, 
-      title: "Autorisations", 
-      description: "Contrôlez l'accès à vos données médicales", 
-      path: "/autorisation", 
-      btnText: "Gérer" 
+    {
+      icon: <CheckCircle2 size={24} />,
+      title: "Autorisations",
+      description: "Contrôlez l'accès à vos données médicales",
+      path: "/autorisation",
+      btnText: "Gérer"
     },
-    { 
-      icon: <FileText size={24} />, 
-      title: "Documents Médicaux", 
-      description: "Vos ordonnances et résultats d'analyses", 
-      path: "/ordonnance", 
-      btnText: "Consulter" 
+    {
+      icon: <FileText size={24} />,
+      title: "Documents Médicaux",
+      description: "Vos ordonnances et résultats d'analyses",
+      path: "/ordonnance",
+      btnText: "Consulter"
     },
-    { 
-      icon: <Notebook size={24} />, 
-      title: "Historique de Santé", 
-      description: "Votre carnet de santé complet", 
-      path: "/carnet", 
-      btnText: "Ouvrir" 
+    {
+      icon: <Notebook size={24} />,
+      title: "Historique de Santé",
+      description: "Votre carnet de santé complet",
+      path: "/carnet",
+      btnText: "Ouvrir"
     },
-    { 
-      icon: <MessageSquare size={24} />, 
-      title: "Messagerie Sécurisée", 
-      description: "Échangez avec vos professionnels de santé", 
-      path: "/messagerie", 
-      btnText: "Ouvrir" 
+    {
+      icon: <MessageSquare size={24} />,
+      title: "Messagerie Sécurisée",
+      description: "Échangez avec vos professionnels de santé",
+      path: "/messagerie",
+      btnText: "Ouvrir"
     },
-    { 
-      icon: <HelpCircle size={24} />, 
-      title: "Support & Assistance", 
-      description: "Contactez notre équipe pour toute question", 
-      path: "/support", 
-      btnText: "Contacter" 
+    {
+      icon: <HelpCircle size={24} />,
+      title: "Support & Assistance",
+      description: "Contactez notre équipe pour toute question",
+      path: "/support",
+      btnText: "Contacter"
     }
   ];
 
@@ -96,57 +82,14 @@ const DashboardPatient = () => {
 
   return (
     <div className="dashboard">
-      {/* Sidebar */}
-      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <div className="sidebar-header">
-          <div className="clinic-logo">
-            <span>Espace</span>Patient
-          </div>
-          <button className="close-sidebar" onClick={closeSidebar}>
-            <X size={20} />
-          </button>
-        </div>
-        
-        <nav className="sidebar-nav">
-          <ul>
-            {menuItems.map((item, index) => (
-              <li key={index}>
-                <Link 
-                  to={item.path} 
-                  className={`nav-link ${activeIcon === index ? 'active' : ''}`}
-                  onClick={() => {
-                    setActiveIcon(index);
-                    closeSidebar();
-                  }}
-                >
-                  <span className="nav-icon">{item.icon}</span>
-                  <span className="nav-text">{item.text}</span>
-                  <ChevronRight size={16} className="nav-chevron" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-          
-          {/* Bouton Déconnexion */}
-          <div className="logout-section">
-            <Link 
-              to="/" 
-              className="logout-link"
-              onClick={() => {
-                // Ajoutez ici la logique de déconnexion
-                closeSidebar();
-              }}
-            >
-              <span className="nav-icon"><LogOut size={20} /></span>
-              <span className="nav-text">Déconnexion</span>
-            </Link>
-          </div>
-        </nav>
-      </aside>
+      <SidebarP
+        sidebarOpen={sidebarOpen}
+        closeSidebar={closeSidebar}
+        activeIcon={activeIcon}
+        setActiveIcon={setActiveIcon}
+      />
 
-      {/* Main Content */}
       <div className="main-content">
-        {/* Top Bar */}
         <header className="top-bar">
           <button className="menu-toggle" onClick={toggleSidebar}>
             <Menu size={24} />
@@ -158,14 +101,12 @@ const DashboardPatient = () => {
           </div>
         </header>
 
-        {/* Dashboard Content */}
         <div className="dashboard-content">
           <div className="welcome-banner">
             <h2>Bienvenue, Jean</h2>
             <p>Votre portail de santé personnalisé</p>
           </div>
 
-          {/* Stats Grid */}
           <div className="stats-grid">
             {stats.map((stat, index) => (
               <div className="stat-card" key={index}>
@@ -176,7 +117,6 @@ const DashboardPatient = () => {
             ))}
           </div>
 
-          {/* Profile Section */}
           <section className="dashboard-section">
             <h3 className="section-title">Votre Profil</h3>
             <div className="profile-grid">
@@ -195,7 +135,6 @@ const DashboardPatient = () => {
             </div>
           </section>
 
-          {/* Features Section */}
           <section className="dashboard-section">
             <h3 className="section-title">Services</h3>
             <div className="features-grid">
@@ -216,7 +155,6 @@ const DashboardPatient = () => {
         </div>
       </div>
 
-      {/* Overlay pour mobile */}
       {sidebarOpen && <div className="dashboard-overlay" onClick={closeSidebar}></div>}
     </div>
   );

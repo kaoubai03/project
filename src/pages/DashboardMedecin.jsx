@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import SidebarM from '../components/layouts/SidebarM';
 import { 
   Menu,
   X,
@@ -24,18 +25,7 @@ const DashboardMedecin = () => {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);
 
-  const menuItems = [
-    { icon: <Home size={20} />, text: "Accueil", path: "/dashboard/doctor" },
-    { icon: <FileText size={20} />, text: "Compte Rendu", path: "/compte-rendu" },
-    { icon: <Pill size={20} />, text: "Ordonnances", path: "/ordonnance" },
-    { icon: <Stethoscope size={20} />, text: "Informations Médicales", path: "/informations-medicales" },
-    { icon: <NotebookText size={20} />, text: "Historique Patients", path: "/historique-patient" },
-    { icon: <CalendarPlus size={20} />, text: "Gestion RDV", path: "/rendez-vous" },
-    { icon: <MessageSquare size={20} />, text: "Messagerie", path: "/messagerie" },
-    { icon: <Settings size={20} />, text: "Paramètres", path: "/parametres" },
-    { icon: <HelpCircle size={20} />, text: "Support", path: "/support" },
-    { icon: <User size={20} />, text: "Mon Profil", path: "/profil-medecin" }
-  ];
+
 
   const cardItems = [
     { 
@@ -70,14 +60,14 @@ const DashboardMedecin = () => {
       icon: <CalendarPlus size={24} />, 
       title: "Gestion des RDV", 
       description: "Planifiez et gérez les rendez-vous de vos patients",
-      path: "/rendez-vous",
+      path: "/Rendez-vousM",
       btnText: "Planifier"
     },
     { 
       icon: <MessageSquare size={24} />, 
       title: "Messagerie Sécurisée", 
       description: "Communiquez de manière sécurisée avec vos patients",
-      path: "/messagerie",
+      path: "/MessagerieM",
       btnText: "Ouvrir"
     },
     { 
@@ -97,52 +87,14 @@ const DashboardMedecin = () => {
 
   return (
     <div className="dashboard">
-      {/* Sidebar */}
-      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <div className="sidebar-header">
-          <div className="clinic-logo">
-            <span>Espace</span>Médecin
-          </div>
-          <button className="close-sidebar" onClick={closeSidebar}>
-            <X size={20} />
-          </button>
-        </div>
-        
-        <nav className="sidebar-nav">
-          <ul>
-            {menuItems.map((item, index) => (
-              <li key={index}>
-                <Link 
-                  to={item.path} 
-                  className={`nav-link ${activeItem === index ? 'active' : ''}`}
-                  onClick={() => {
-                    setActiveItem(index);
-                    closeSidebar();
-                  }}
-                >
-                  <span className="nav-icon">{item.icon}</span>
-                  <span className="nav-text">{item.text}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+      <SidebarM
+        sidebarOpen={sidebarOpen}
+        closeSidebar={closeSidebar}
+        activeItem={activeItem}
+        setActiveItem={setActiveItem}
+      />
+      
           
-          {/* Bouton Déconnexion */}
-          <div className="logout-section">
-            <Link 
-              to="/" 
-              className="logout-link"
-              onClick={() => {
-                // Logique de déconnexion
-                closeSidebar();
-              }}
-            >
-              <span className="nav-icon"><LogOut size={20} /></span>
-              <span className="nav-text">Déconnexion</span>
-            </Link>
-          </div>
-        </nav>
-      </aside>
 
       {/* Main Content */}
       <div className="main-content">
