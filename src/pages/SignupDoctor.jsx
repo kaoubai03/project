@@ -5,7 +5,7 @@ import Button from '../components/ui/Button';
 import FormField from '../components/ui/FormField';
 import FileUpload from '../components/ui/FileUpload';
 import { useUser } from '../context/UserContext';
-import './SignupDoctor.css';
+import './css/SignupDoctor.css';
 
 const SignupDoctor = () => {
   const navigate = useNavigate();

@@ -5,7 +5,7 @@ import {
   CalendarPlus, MessageSquare, User, Home,
   Settings, HelpCircle, LogOut, X
 } from 'lucide-react';
-import './Sidebar.css'; // ajuste le chemin si nécessaire
+import styles from './SidebarM.module.css';
 
 const SidebarM = ({ sidebarOpen, closeSidebar, activeItem, setActiveItem }) => {
   const menuItems = [
@@ -22,45 +22,45 @@ const SidebarM = ({ sidebarOpen, closeSidebar, activeItem, setActiveItem }) => {
   ];
 
   return (
-    <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-      <div className="sidebar-header">
-        <div className="clinic-logo">
+    <aside className={`${styles.sidebar} ${sidebarOpen ? styles.open : ''}`}>
+      <div className={styles.sidebarHeader}>
+        <div className={styles.clinicLogo}>
           <span>Espace</span>Médecin
         </div>
-        <button className="close-sidebar" onClick={closeSidebar}>
+        <button className={styles.closeSidebar} onClick={closeSidebar}>
           <X size={20} />
         </button>
       </div>
 
-      <nav className="sidebar-nav">
+      <nav className={styles.sidebarNav}>
         <ul>
           {menuItems.map((item, index) => (
             <li key={index}>
               <Link
                 to={item.path}
-                className={`nav-link ${activeItem === index ? 'active' : ''}`}
+                className={`${styles.navLink} ${activeItem === index ? styles.active : ''}`}
                 onClick={() => {
                   setActiveItem(index);
                   closeSidebar();
                 }}
               >
-                <span className="nav-icon">{item.icon}</span>
-                <span className="nav-text">{item.text}</span>
+                <span className={styles.navIcon}>{item.icon}</span>
+                <span className={styles.navText}>{item.text}</span>
               </Link>
             </li>
           ))}
         </ul>
 
-        <div className="logout-section">
+        <div className={styles.logoutSection}>
           <Link
             to="/"
-            className="logout-link"
+            className={styles.logoutLink}
             onClick={() => {
               closeSidebar();
             }}
           >
-            <span className="nav-icon"><LogOut size={20} /></span>
-            <span className="nav-text">Déconnexion</span>
+            <span className={styles.navIcon}><LogOut size={20} /></span>
+            <span className={styles.navText}>Déconnexion</span>
           </Link>
         </div>
       </nav>

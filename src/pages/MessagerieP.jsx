@@ -15,7 +15,7 @@ import {
   User,
 
 } from 'lucide-react';
-import './MessagerieP.css';
+import './css/MessagerieP.css';
 
 const MessagerieP = () => {
   // États principaux

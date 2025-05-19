@@ -16,7 +16,7 @@ import {
   HelpCircle,
   LogOut
 } from 'lucide-react';
-import './DashboardMedecin.css';
+import styles from './css/DashboardMedecin.module.css';
 
 const DashboardMedecin = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -24,8 +24,6 @@ const DashboardMedecin = () => {
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);
-
-
 
   const cardItems = [
     { 
@@ -86,60 +84,53 @@ const DashboardMedecin = () => {
   ];
 
   return (
-    <div className="dashboard">
+    <div className={styles.dashboard}>
       <SidebarM
         sidebarOpen={sidebarOpen}
         closeSidebar={closeSidebar}
         activeItem={activeItem}
         setActiveItem={setActiveItem}
       />
-      
-          
 
-      {/* Main Content */}
-      <div className="main-content">
-        {/* Top Bar */}
-        <header className="top-bar">
-          <button className="menu-toggle" onClick={toggleSidebar}>
+      <div className={styles.mainContent}>
+        <header className={styles.topBar}>
+          <button className={styles.menuToggle} onClick={toggleSidebar}>
             <Menu size={24} />
           </button>
           <h1>MedConsole</h1>
-          <div className="user-profile">
-            <div className="user-avatar">DR</div>
-            <span className="user-name">Dr. Dupont</span>
+          <div className={styles.userProfile}>
+            <div className={styles.userAvatar}>DR</div>
+            <span className={styles.userName}>Dr. Dupont</span>
           </div>
         </header>
 
-        {/* Dashboard Content */}
-        <div className="dashboard-content">
-          <div className="welcome-banner">
+        <div className={styles.dashboardContent}>
+          <div className={styles.welcomeBanner}>
             <h2>Bienvenue, Dr. Dupont</h2>
             <p>Votre portail professionnel de gestion médicale</p>
           </div>
 
-          {/* Stats Grid */}
-          <div className="stats-grid">
+          <div className={styles.statsGrid}>
             {stats.map((stat, index) => (
-              <div className="stat-card" key={index}>
-                <div className="stat-icon">{stat.icon}</div>
-                <div className="stat-value">{stat.value}</div>
-                <div className="stat-label">{stat.label}</div>
+              <div className={styles.statCard} key={index}>
+                <div className={styles.statIcon}>{stat.icon}</div>
+                <div className={styles.statValue}>{stat.value}</div>
+                <div className={styles.statLabel}>{stat.label}</div>
               </div>
             ))}
           </div>
 
-          {/* Features Section */}
-          <section className="dashboard-section">
-            <h3 className="section-title">Outils Professionnels</h3>
-            <div className="features-grid">
+          <section className={styles.dashboardSection}>
+            <h3 className={styles.sectionTitle}>Outils Professionnels</h3>
+            <div className={styles.featuresGrid}>
               {cardItems.map((card, index) => (
-                <div className={`feature-card ${card.title === "Support & Assistance" ? "support-card" : ""}`} key={index}>
-                  <div className="card-header">
-                    <div className="card-icon">{card.icon}</div>
+                <div className={`${styles.featureCard} ${card.title === "Support & Assistance" ? styles.supportCard : ''}`} key={index}>
+                  <div className={styles.cardHeader}>
+                    <div className={styles.cardIcon}>{card.icon}</div>
                     <h4>{card.title}</h4>
                   </div>
-                  <p className="card-description">{card.description}</p>
-                  <Link to={card.path} className="card-action">
+                  <p className={styles.cardDescription}>{card.description}</p>
+                  <Link to={card.path} className={styles.cardAction}>
                     {card.btnText}
                   </Link>
                 </div>
@@ -149,8 +140,7 @@ const DashboardMedecin = () => {
         </div>
       </div>
 
-      {/* Overlay pour mobile */}
-      {sidebarOpen && <div className="dashboard-overlay" onClick={closeSidebar}></div>}
+      {sidebarOpen && <div className={styles.dashboardOverlay} onClick={closeSidebar}></div>}
     </div>
   );
 };

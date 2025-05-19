@@ -1,3 +1,25 @@
+:root {
+  /* Couleurs du thème */
+  --primary-color: #0d9488;
+  --primary-hover: #0f766e;
+  --secondary-color: #6b7280;
+  --accent-teal: #0d9488;
+  --accent-pink: #ec4899;
+  --accent-blue: #3b82f6;
+  --error-bg: #fef2f2;
+  --error-border: #fecaca;
+  
+  /* Espacements */
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  
+  /* Bordures */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
 .app-container {
   min-height: 100vh;
   display: flex;

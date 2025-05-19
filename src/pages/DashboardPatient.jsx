@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, User, Calendar, FileText, Notebook, MessageSquare, ChevronRight, CheckCircle2, HelpCircle, Stethoscope } from 'lucide-react';
 import SidebarP from '../components/layouts/sidebarP';
-import './DashboardPatient.css';
+import styles from './css/DashboardPatient.module.css';
 
 const DashboardPatient = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -62,7 +62,7 @@ const DashboardPatient = () => {
       icon: <MessageSquare size={24} />,
       title: "Messagerie Sécurisée",
       description: "Échangez avec vos professionnels de santé",
-      path: "/messagerie",
+      path: "/messagerie-P",
       btnText: "Ouvrir"
     },
     {
@@ -80,8 +80,8 @@ const DashboardPatient = () => {
     { icon: <MessageSquare size={20} />, value: 3, label: "Messages" }
   ];
 
-  return (
-    <div className="dashboard">
+ return (
+    <div className={styles.dashboard}>
       <SidebarP
         sidebarOpen={sidebarOpen}
         closeSidebar={closeSidebar}
@@ -89,45 +89,45 @@ const DashboardPatient = () => {
         setActiveIcon={setActiveIcon}
       />
 
-      <div className="main-content">
-        <header className="top-bar">
-          <button className="menu-toggle" onClick={toggleSidebar}>
+      <div className={styles.mainContent}>
+        <header className={styles.topBar}>
+          <button className={styles.menuToggle} onClick={toggleSidebar}>
             <Menu size={24} />
           </button>
           <h1>MyHealth</h1>
-          <div className="user-profile">
-            <div className="user-avatar">JP</div>
-            <span className="user-name">Jean Patient</span>
+          <div className={styles.userProfile}>
+            <div className={styles.userAvatar}>JP</div>
+            <span className={styles.userName}>Jean Patient</span>
           </div>
         </header>
 
-        <div className="dashboard-content">
-          <div className="welcome-banner">
+        <div className={styles.dashboardContent}>
+          <div className={styles.welcomeBanner}>
             <h2>Bienvenue, Jean</h2>
             <p>Votre portail de santé personnalisé</p>
           </div>
 
-          <div className="stats-grid">
+          <div className={styles.statsGrid}>
             {stats.map((stat, index) => (
-              <div className="stat-card" key={index}>
-                <div className="stat-icon">{stat.icon}</div>
-                <div className="stat-value">{stat.value}</div>
-                <div className="stat-label">{stat.label}</div>
+              <div className={styles.statCard} key={index}>
+                <div className={styles.statIcon}>{stat.icon}</div>
+                <div className={styles.statValue}>{stat.value}</div>
+                <div className={styles.statLabel}>{stat.label}</div>
               </div>
             ))}
           </div>
 
-          <section className="dashboard-section">
-            <h3 className="section-title">Votre Profil</h3>
-            <div className="profile-grid">
+          <section className={styles.dashboardSection}>
+            <h3 className={styles.sectionTitle}>Votre Profil</h3>
+            <div className={styles.profileGrid}>
               {profileCards.map((card, index) => (
-                <div className="profile-card" key={index}>
-                  <div className="card-header">
-                    <div className="card-icon">{card.icon}</div>
+                <div className={styles.profileCard} key={index}>
+                  <div className={styles.cardHeader}>
+                    <div className={styles.cardIcon}>{card.icon}</div>
                     <h4>{card.title}</h4>
                   </div>
-                  <p className="card-description">{card.description}</p>
-                  <Link to={card.path} className="card-action">
+                  <p className={styles.cardDescription}>{card.description}</p>
+                  <Link to={card.path} className={styles.cardAction}>
                     {card.btnText} <ChevronRight size={16} />
                   </Link>
                 </div>
@@ -135,17 +135,17 @@ const DashboardPatient = () => {
             </div>
           </section>
 
-          <section className="dashboard-section">
-            <h3 className="section-title">Services</h3>
-            <div className="features-grid">
+          <section className={styles.dashboardSection}>
+            <h3 className={styles.sectionTitle}>Services</h3>
+            <div className={styles.featuresGrid}>
               {featureCards.map((card, index) => (
-                <div className={`feature-card ${card.title.includes('Support') ? 'support-card' : ''}`} key={index}>
-                  <div className="card-header">
-                    <div className="card-icon">{card.icon}</div>
+                <div className={`${styles.featureCard} ${card.title.includes('Support') ? styles.supportCard : ''}`} key={index}>
+                  <div className={styles.cardHeader}>
+                    <div className={styles.cardIcon}>{card.icon}</div>
                     <h4>{card.title}</h4>
                   </div>
-                  <p className="card-description">{card.description}</p>
-                  <Link to={card.path} className="card-action">
+                  <p className={styles.cardDescription}>{card.description}</p>
+                  <Link to={card.path} className={styles.cardAction}>
                     {card.btnText} <ChevronRight size={16} />
                   </Link>
                 </div>
@@ -155,7 +155,7 @@ const DashboardPatient = () => {
         </div>
       </div>
 
-      {sidebarOpen && <div className="dashboard-overlay" onClick={closeSidebar}></div>}
+      {sidebarOpen && <div className={styles.dashboardOverlay} onClick={closeSidebar}></div>}
     </div>
   );
 };

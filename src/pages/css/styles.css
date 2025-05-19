@@ -1,0 +1,94 @@
+/* ===== VARIABLES & RESET ===== */
+:root {
+  /* Couleurs */
+  --primary: #3b82f6;
+  --primary-light: #93c5fd;
+  --primary-dark: #1d4ed8;
+  --secondary: #10b981;
+  --accent: #ec4899;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --dark: #1e293b;
+  --light: #f8fafc;
+  --gray: #64748b;
+  --light-gray: #e2e8f0;
+  --white: #ffffff;
+
+  /* Dimensions */
+  --header-height: 4rem;
+  --footer-height: 5rem;
+  --sidebar-width: 80px;
+  --expanded-sidebar: 240px;
+  --container-width: 1200px;
+  --form-width: 28rem;
+  --wide-width: 56rem;
+  --border-radius: 10px;
+
+  /* Espacements */
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+
+  /* Effets */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* ===== LAYOUT STRUCTURE ===== */
+.layout-header {
+  height: var(--header-height);
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--white);
+  box-shadow: var(--shadow-sm);
+   height: auto; /* Remplacé par 'auto' pour flexibilité */
+  min-height: var(--header-height); /* Garantit une hauteur minimale */
+}
+
+.layout-footer {
+  height: var(--footer-height);
+  padding: var(--space-lg);
+  background-color: var(--white);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: auto; /* Remplacé par 'auto' pour flexibilité */
+  min-height: var(--header-height); /* Garantit une hauteur minimale */
+  height: auto; /* Surcharge si nécessaire */
+}
+
+.layout-main {
+  flex-grow: 1;
+  padding: var(--space-lg);
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  height: 100%;
+}
+
+/* ===== COMPOSANTS COMMUNS ===== */
+/* Boutons */
+.button {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+/* Icônes */
+.icon {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.icon-sm {
+  height: 1rem;
+  width: 1rem;
+}
+
+.icon-lg {
+  height: 2.5rem;
+  width: 2.5rem;
+}

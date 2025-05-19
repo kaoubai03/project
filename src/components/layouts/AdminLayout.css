@@ -1,0 +1,26 @@
+/* components/layouts/AdminLayout.css */
+.admin-layout-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+.admin-main-content {
+  flex: 1;
+  margin-left: 250px; /* Correspond à la largeur de la sidebar */
+  padding: 2rem;
+  transition: margin-left 0.3s ease;
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-main-content {
+    margin-left: 70px;
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,392 @@
+/* Layout Container */
+.rendezvousContainer {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--light);
+}
+
+.mainContent {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  margin-left: var(--sidebar-width);
+}
+
+.dashboardOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+/* Header */
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.topBar h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  color: var(--dark);
+}
+
+.menuToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dark);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Buttons */
+.createButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.createButton:hover {
+  background-color: var(--primary-dark);
+  box-shadow: var(--shadow-md);
+}
+
+/* Search and Filter */
+.searchFilterBar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.searchBox {
+  flex: 1;
+  min-width: 250px;
+  position: relative;
+}
+
+.searchBox input {
+  width: 100%;
+  padding: 0.75rem 2.5rem;
+  border: 1px solid var(--light-gray);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+}
+
+.searchBox svg {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray);
+}
+
+.filterDropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 200px;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--light-gray);
+}
+
+.filterDropdown select {
+  width: 100%;
+  padding: 0.75rem 2rem 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  appearance: none;
+  font-size: 1rem;
+}
+
+.filterDropdown svg:first-child {
+  margin-left: 0.75rem;
+  color: var(--gray);
+}
+
+.filterDropdown svg:last-child {
+  position: absolute;
+  right: 0.75rem;
+  pointer-events: none;
+}
+
+/* Form Styles */
+.createForm {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--dark);
+  font-weight: 500;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  padding: 0.75rem;
+  border: 1px solid var(--light-gray);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  width: 100%;
+}
+
+.disabledDate {
+  background-color: var(--light);
+  color: var(--gray);
+}
+
+.dateWarning {
+  font-size: 0.75rem;
+  color: var(--danger);
+  margin-top: 0.5rem;
+}
+
+.disabledTime {
+  color: var(--gray);
+  background-color: var(--light);
+}
+
+.formGroup textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.errorMessage {
+  color: var(--danger);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  grid-column: 1 / -1;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.confirmBtn {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.cancelBtn {
+  background-color: var(--light);
+  color: var(--dark);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--light-gray);
+  margin-bottom: 1.5rem;
+}
+
+.tabs button {
+  padding: 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--gray);
+}
+
+.tabs button.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* Appointment Cards */
+.appointmentsList {
+  display: grid;
+  gap: 1rem;
+}
+
+.appointmentCard {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid transparent;
+}
+
+.appointmentCard.planifié {
+  border-left-color: var(--warning);
+}
+
+.appointmentCard.confirmé {
+  border-left-color: var(--secondary);
+}
+
+.appointmentCard.annulé {
+  border-left-color: var(--danger);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cardHeader strong {
+  font-size: 1.125rem;
+  color: var(--dark);
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.statusBadge.planifié {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+}
+
+.statusBadge.confirmé {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--secondary);
+}
+
+.statusBadge.annulé {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+.cardActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.editBtn {
+  background-color: var(--light);
+  color: var(--primary);
+  border: 1px solid var(--light-gray);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.statusSelect {
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--light-gray);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.cardDetails p {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+}
+
+.cardDetails strong {
+  color: var(--dark);
+}
+
+/* Loading States */
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.spinIcon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.noAppointments {
+  text-align: center;
+  color: var(--gray);
+  padding: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 1.5rem 1rem;
+    margin-left: 0;
+  }
+
+  .searchFilterBar {
+    flex-direction: column;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cardActions {
+    width: 100%;
+  }
+
+  .statusSelect {
+    width: 100%;
+  }
+}

@@ -25,12 +25,7 @@ const AuthLayout = () => {
               <a href="/dashboard" className="nav-link">
                 Dashboard
               </a>
-              <button 
-                className="profile-button"
-                onClick={() => console.log('Profile clicked')}
-              >
-                My Profile
-              </button>
+              
             </nav>
           )}
         </div>

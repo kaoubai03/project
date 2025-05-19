@@ -18,7 +18,7 @@ import {
   Tag,
   Download
 } from 'lucide-react';
-import './MessagerieM.css';
+import './css/MessagerieM.css';
 
 const MessagerieM = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -34,6 +34,7 @@ const MessagerieM = () => {
   const [showLabelMenuForMessage, setShowLabelMenuForMessage] = useState(null);
   const messagesEndRef = useRef(null);
 
+  
   // Données des labels
   const [labels] = useState([
     { id: 1, name: 'Urgent', color: '#e74c3c' },

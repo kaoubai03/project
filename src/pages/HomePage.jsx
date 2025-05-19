@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { UserPlus, LogIn, Activity, Heart, Stethoscope } from 'lucide-react';
 import Button from '../components/ui/Button';
-import './HomePage.css';
+import AboutUs from './AboutUs';
+import './css/HomePage.css';
 
 const HomePage = () => {
     return (
@@ -70,6 +71,8 @@ const HomePage = () => {
             </div>
           ))}
         </div>
+        {/*<AboutUs />*/}
+
       </div>
     );
   };

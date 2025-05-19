@@ -1,25 +1,3 @@
-:root {
-  --primary: #3b82f6;
-  --primary-light: #93c5fd;
-  --primary-dark: #1d4ed8;
-  --secondary: #10b981;
-  --accent: #ec4899;
-  --danger: #ef4444;
-  --dark: #1e293b;
-  --light: #f8fafc;
-  --gray: #64748b;
-  --light-gray: #e2e8f0;
-  --white: #ffffff;
-  --sidebar-width: 80px;
-  --expanded-sidebar: 240px;
-  --border-radius: 10px;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Sidebar */
 .sidebar {
   width: var(--expanded-sidebar);
   background: var(--white);
@@ -40,7 +18,7 @@
   left: 0;
 }
 
-.sidebar-header {
+.sidebarHeader {
   padding: 1.5rem;
   display: flex;
   justify-content: space-between;
@@ -48,18 +26,29 @@
   border-bottom: 1px solid var(--light-gray);
 }
 
-.clinic-logo {
+.menuToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dark);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clinicLogo {
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--dark);
   white-space: nowrap;
 }
 
-.clinic-logo span {
+.clinicLogo span {
   color: var(--primary);
 }
 
-.close-sidebar {
+.closeSidebar {
   background: none;
   border: none;
   color: var(--gray);
@@ -69,17 +58,12 @@
   transition: var(--transition);
 }
 
-.sidebar-open .main-content {
-  margin-left: 250px;
-  transition: margin-left 0.3s ease;
-}
-
-.close-sidebar:hover {
+.closeSidebar:hover {
   background: var(--light-gray);
   color: var(--dark);
 }
 
-.sidebar-nav {
+.sidebarNav {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -87,12 +71,12 @@
   overflow-y: auto;
 }
 
-.sidebar-nav ul {
+.sidebarNav ul {
   list-style: none;
   flex: 1;
 }
 
-.nav-link {
+.navLink {
   display: flex;
   align-items: center;
   padding: 0.75rem 1.5rem;
@@ -101,19 +85,19 @@
   transition: var(--transition);
 }
 
-.nav-link:hover {
+.navLink:hover {
   color: var(--primary);
   background-color: rgba(59, 130, 246, 0.05);
 }
 
-.nav-link.active {
+.navLink.active {
   color: var(--primary);
   background-color: rgba(59, 130, 246, 0.1);
   font-weight: 500;
   position: relative;
 }
 
-.nav-link.active::before {
+.navLink.active::before {
   content: '';
   position: absolute;
   left: 0;
@@ -122,43 +106,42 @@
   background-color: var(--primary);
 }
 
-.nav-icon {
+.navIcon {
   margin-right: 1rem;
   color: var(--gray);
   flex-shrink: 0;
 }
 
-.nav-link:hover .nav-icon,
-.nav-link.active .nav-icon {
+.navLink:hover .navIcon,
+.navLink.active .navIcon {
   color: var(--primary);
 }
 
-.nav-text {
+.navText {
   font-size: 0.9375rem;
   font-weight: 500;
   white-space: nowrap;
 }
 
-.nav-chevron {
+.navChevron {
   margin-left: auto;
   color: var(--light-gray);
   transition: var(--transition);
 }
 
-.nav-link:hover .nav-chevron,
-.nav-link.active .nav-chevron {
+.navLink:hover .navChevron,
+.navLink.active .navChevron {
   color: var(--primary);
   transform: translateX(3px);
 }
 
-/* Déconnexion */
-.logout-section {
+.logoutSection {
   margin-top: auto;
   padding: 1rem 0;
   border-top: 1px solid var(--light-gray);
 }
 
-.logout-link {
+.logoutLink {
   display: flex;
   align-items: center;
   padding: 0.75rem 1.5rem;
@@ -167,32 +150,13 @@
   transition: var(--transition);
 }
 
-.logout-link:hover {
+.logoutLink:hover {
   color: var(--danger);
   background-color: rgba(239, 68, 68, 0.05);
 }
 
-.logout-link:hover .nav-icon {
+.logoutLink:hover .navIcon {
   color: var(--danger);
-}
-
-/* Menu Toggle (Top Bar Left Button) */
-.menu-toggle {
-  background: none;
-  border: none;
-  color: var(--gray);
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: var(--border-radius);
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.menu-toggle:hover {
-  background: var(--light-gray);
-  color: var(--dark);
 }
 
 @media (max-width: 1024px) {
@@ -200,11 +164,7 @@
     left: -100%;
   }
   
-  .menu-toggle {
-    display: block;
-  }
-  
-  .sidebar.open + .main-content {
+  .sidebar.open + .mainContent {
     margin-left: 0;
   }
 }

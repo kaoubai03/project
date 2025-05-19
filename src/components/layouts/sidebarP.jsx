@@ -1,11 +1,10 @@
-// SidebarP.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   Home, User, Calendar, FileText, Notebook, MessageSquare,
   HelpCircle, Settings, LogOut, ChevronRight, X
 } from 'lucide-react';
-import './Sidebar.css'; // Utilise le même CSS que l'original
+import styles from './SidebarP.module.css';
 
 const SidebarP = ({ sidebarOpen, closeSidebar, activeIcon, setActiveIcon }) => {
   const menuItems = [
@@ -20,49 +19,48 @@ const SidebarP = ({ sidebarOpen, closeSidebar, activeIcon, setActiveIcon }) => {
   ];
 
   return (
-    <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-      <div className="sidebar-header">
-        <div className="clinic-logo">
+    <aside className={`${styles.sidebar} ${sidebarOpen ? styles.open : ''}`}>
+      <div className={styles.sidebarHeader}>
+        <div className={styles.clinicLogo}>
           <span>Espace</span>Patient
         </div>
-        <button className="close-sidebar" onClick={closeSidebar}>
+        <button className={styles.closeSidebar} onClick={closeSidebar}>
           <X size={20} />
         </button>
       </div>
 
-      <nav className="sidebar-nav">
+      <nav className={styles.sidebarNav}>
         <ul>
           {menuItems.map((item, index) => (
             <li key={index}>
               <Link
                 to={item.path}
-                className={`nav-link ${activeIcon === index ? 'active' : ''}`}
+                className={`${styles.navLink} ${activeIcon === index ? styles.active : ''}`}
                 onClick={() => {
                   setActiveIcon(index);
                   closeSidebar();
                 }}
               >
-                <span className="nav-icon">{item.icon}</span>
-                <span className="nav-text">{item.text}</span>
-                <ChevronRight size={16} className="nav-chevron" />
+                <span className={styles.navIcon}>{item.icon}</span>
+                <span className={styles.navText}>{item.text}</span>
+                <ChevronRight size={16} className={styles.navChevron} />
               </Link>
             </li>
           ))}
         </ul>
 
-        <div className="logout-section">
+        <div className={styles.logoutSection}>
           <Link
             to="/"
-            className="logout-link"
+            className={styles.logoutLink}
             onClick={closeSidebar}
           >
-            <span className="nav-icon"><LogOut size={20} /></span>
-            <span className="nav-text">Déconnexion</span>
+            <span className={styles.navIcon}><LogOut size={20} /></span>
+            <span className={styles.navText}>Déconnexion</span>
           </Link>
         </div>
       </nav>
     </aside>
-    
   );
 };
 

@@ -1,17 +1,4 @@
 /* Reset & Base */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  color: var(--dark);
-  background-color: var(--light);
-  line-height: 1.5;
-}
-
 .dashboard {
   display: flex;
   min-height: 100vh;
@@ -19,18 +6,18 @@ body {
 }
 
 /* Contenu Principal */
-.main-content {
+.mainContent {
   flex: 1;
   margin-left: 0;
   transition: var(--transition);
 }
 
-.sidebar.open + .main-content {
+.sidebar.open + .mainContent {
   transform: translateX(var(--expanded-sidebar));
 }
 
 /* Top Bar */
-.top-bar {
+.topBar {
   position: sticky;
   top: 0;
   z-index: 90;
@@ -42,13 +29,13 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
-.user-profile {
+.userProfile {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-.user-avatar {
+.userAvatar {
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -61,45 +48,45 @@ body {
   font-size: 0.875rem;
 }
 
-.user-name {
+.userName {
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--dark);
 }
 
 /* Contenu Dashboard */
-.dashboard-content {
+.dashboardContent {
   padding: 2rem;
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
 }
 
-.welcome-banner {
+.welcomeBanner {
   margin-bottom: 2.5rem;
 }
 
-.welcome-banner h2 {
+.welcomeBanner h2 {
   font-size: 1.75rem;
   font-weight: 600;
   color: var(--dark);
   margin-bottom: 0.5rem;
 }
 
-.welcome-banner p {
+.welcomeBanner p {
   color: var(--gray);
   font-size: 1rem;
 }
 
 /* Statistiques */
-.stats-grid {
+.statsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1.25rem;
   margin-bottom: 3rem;
 }
 
-.stat-card {
+.statCard {
   background: var(--white);
   padding: 1.5rem;
   border-radius: var(--border-radius);
@@ -109,12 +96,12 @@ body {
   border-top: 4px solid var(--primary);
 }
 
-.stat-card:hover {
+.statCard:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-lg);
 }
 
-.stat-icon {
+.statIcon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -126,25 +113,25 @@ body {
   margin-bottom: 0.75rem;
 }
 
-.stat-value {
+.statValue {
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--dark);
   margin-bottom: 0.25rem;
 }
 
-.stat-label {
+.statLabel {
   font-size: 0.875rem;
   color: var(--gray);
   font-weight: 500;
 }
 
 /* Sections */
-.dashboard-section {
+.dashboardSection {
   margin-bottom: 3rem;
 }
 
-.section-title {
+.sectionTitle {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--dark);
@@ -154,16 +141,16 @@ body {
 }
 
 /* Grilles */
-.profile-grid,
-.features-grid {
+.profileGrid,
+.featuresGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
-.profile-card,
-.feature-card {
+.profileCard,
+.featureCard {
   background: var(--white);
   padding: 1.5rem;
   border-radius: var(--border-radius);
@@ -171,28 +158,28 @@ body {
   transition: var(--transition);
 }
 
-.profile-card {
+.profileCard {
   border-left: 4px solid var(--secondary);
 }
 
-.feature-card {
+.featureCard {
   border-top: 4px solid var(--accent);
 }
 
-.profile-card:hover,
-.feature-card:hover {
+.profileCard:hover,
+.featureCard:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-lg);
 }
 
-.card-header {
+.cardHeader {
   display: flex;
   align-items: flex-start;
   margin-bottom: 1rem;
   gap: 1rem;
 }
 
-.card-icon {
+.cardIcon {
   width: 40px;
   height: 40px;
   display: flex;
@@ -202,31 +189,31 @@ body {
   flex-shrink: 0;
 }
 
-.profile-card .card-icon {
+.profileCard .cardIcon {
   background-color: rgba(16, 185, 129, 0.1);
   color: var(--secondary);
 }
 
-.feature-card .card-icon {
+.featureCard .cardIcon {
   background-color: rgba(236, 72, 153, 0.1);
   color: var(--accent);
 }
 
-.card-header h4 {
+.cardHeader h4 {
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--dark);
   margin-bottom: 0.25rem;
 }
 
-.card-description {
+.cardDescription {
   color: var(--gray);
   font-size: 0.9375rem;
   margin-bottom: 1.5rem;
 }
 
 /* Bouton Action */
-.card-action {
+.cardAction {
   display: inline-flex;
   align-items: center;
   padding: 0.5rem 1.25rem;
@@ -239,6 +226,19 @@ body {
   transition: var(--transition);
 }
 
-.card-action:hover {
+.cardAction:hover {
   background-color: var(--primary-dark);
 }
+
+.dashboardOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 80;
+}
+
+/* Note: Les sélecteurs comme .profileCard .cardIcon doivent être adaptés */
+/* Dans les modules CSS, vous devrez peut-être les imbriquer différemment */

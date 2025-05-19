@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserRound, Stethoscope, ArrowLeft } from 'lucide-react';
 import Button from '../components/ui/Button';
-import './UserTypeSelection.css';
+import './css/UserTypeSelection.css';
 
 const UserTypeSelection = ({ mode }) => {
   const navigate = useNavigate();

@@ -4,7 +4,7 @@ import { ArrowLeft, User } from 'lucide-react';
 import Button from '../components/ui/Button';
 import FormField from '../components/ui/FormField';
 import { useUser } from '../context/UserContext';
-import './SignupPatient.css';
+import './css/SignupPatient.css';
 
 const SignupPatient = () => {
   const navigate = useNavigate();
