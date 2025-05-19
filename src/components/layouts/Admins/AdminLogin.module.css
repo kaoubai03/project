@@ -1,9 +1,7 @@
-
-    /* Variables */
-/*:root {
+/* Variables locales (si nécessaire) */
+:local {
   --primary-color: #4361ee;
   --secondary-color: #3a0ca3;
-  --success-color: #4cc9f0;
   --error-color: #f94144;
   --light-bg: #f8f9fa;
   --dark-text: #2b2d42;
@@ -14,16 +12,7 @@
   --transition: all 0.3s ease;
 }
 
-/* Reset */
-/* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Layout */
-/*.login-container {
+.loginContainer {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -31,34 +20,25 @@
 }
 
 /* Header */
-/*.login-header {
+.loginHeader {
   padding: 1.5rem 2rem;
   background-color: var(--light-bg);
- 
   position: relative;
 }
 
-.header-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.logo-container {
+.logoContainer {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  justify-content: center;
 }
 
-.logo-icon {
+.logoIcon {
   color: var(--primary-color);
   font-size: 1.8rem;
 }
 
-.logo-text {
+.logoText {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--dark-text);
@@ -67,28 +47,8 @@
   -webkit-text-fill-color: transparent;
 }
 
-.header-icon {
-  color: var(--light-text);
-  cursor: pointer;
-  transition: var(--transition);
-  font-size: 1.5rem;
-}
-
-.header-icon:hover {
-  color: var(--primary-color);
-  transform: scale(1.1);
-}
-
-.left-icon {
-  margin-right: auto;
-}
-
-.right-icon {
-  margin-left: auto;
-}
-
 /* Login Card */
-/*.login-card {
+.loginCard {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -104,40 +64,40 @@
   text-align: center;
 }
 
-.login-card h1 {
+.loginCard h1 {
   font-size: 1.8rem;
   color: var(--dark-text);
   margin-bottom: 0.5rem;
 }
 
-.login-instructions {
+.loginInstructions {
   color: var(--light-text);
   margin-bottom: 2rem;
   font-size: 0.95rem;
 }
 
 /* Form */
-/*.login-form {
+.loginForm {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.form-group {
+.formGroup {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   text-align: left;
 }
 
-.form-group label {
+.formGroup label {
   font-size: 0.9rem;
   color: var(--dark-text);
   font-weight: 500;
 }
 
-.form-group input {
+.formGroup input {
   padding: 0.8rem 1rem;
   border: 1px solid #e0e0e0;
   border-radius: var(--border-radius);
@@ -145,14 +105,14 @@
   transition: var(--transition);
 }
 
-.form-group input:focus {
+.formGroup input:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
 }
 
 /* Error Message */
-/*.error-message {
+.errorMessage {
   background-color: rgba(249, 65, 68, 0.1);
   color: var(--error-color);
   padding: 0.8rem 1rem;
@@ -165,7 +125,7 @@
 }
 
 /* Login Button */
-/*.login-btn {
+.loginBtn {
   background-color: var(--primary-color);
   color: var(--white);
   border: none;
@@ -178,13 +138,13 @@
   margin-top: 1rem;
 }
 
-.login-btn:hover {
+.loginBtn:hover {
   background-color: var(--secondary-color);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
 }
 
-.login-btn:disabled {
+.loginBtn:disabled {
   background-color: var(--light-text);
   cursor: not-allowed;
   transform: none;
@@ -192,22 +152,17 @@
 }
 
 /* Responsive */
-/*@media (max-width: 768px) {
-  .login-header {
+@media (max-width: 768px) {
+  .loginHeader {
     padding: 1rem;
   }
   
-  .brand-name {
-    font-size: 1.2rem;
-  }
-  
-  .login-card {
+  .loginCard {
     padding: 1.5rem;
     margin: 1rem auto;
   }
   
-  .login-card h1 {
+  .loginCard h1 {
     font-size: 1.5rem;
   }
 }
-*/

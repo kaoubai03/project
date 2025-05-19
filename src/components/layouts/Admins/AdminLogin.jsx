@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useAdmin } from '../../../context/AdminContext';
 import { useNavigate } from 'react-router-dom';
-import { Activity, Plus, Home,HeartPulse } from 'lucide-react';
-import './AdminLogin.css';
+import { Activity, Plus, Home, HeartPulse } from 'lucide-react';
+import styles from './AdminLogin.module.css';
 
 const AdminLogin = () => {
   const { loginAdmin } = useAdmin();
@@ -28,30 +28,28 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="login-container">
-      <header className="login-header">
-   
-          <div className="logo-container">
-            <HeartPulse className="logo-icon" />
-            <span className="logo-text">eHealth+</span>
-          </div>
-         
+    <div className={styles.loginContainer}>
+      <header className={styles.loginHeader}>
+        <div className={styles.logoContainer}>
+          <HeartPulse className={styles.logoIcon} />
+          <span className={styles.logoText}>eHealth+</span>
+        </div>
       </header>
 
-      <div className="login-card">
+      <div className={styles.loginCard}>
         <h1>Connexion Admin</h1>
-        <p className="login-instructions">
+        <p className={styles.loginInstructions}>
           Veuillez utiliser vos identifiants administrateur
         </p>
 
-        <form onSubmit={handleLogin} className="login-form" noValidate>
+        <form onSubmit={handleLogin} className={styles.loginForm} noValidate>
           {error && (
-            <div className="error-message" role="alert">
+            <div className={styles.errorMessage} role="alert">
               <span>⚠️</span> {error}
             </div>
           )}
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="email">Email</label>
             <input
               id="email"
@@ -63,7 +61,7 @@ const AdminLogin = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="password">Mot de passe</label>
             <input
               id="password"
@@ -77,7 +75,7 @@ const AdminLogin = () => {
 
           <button
             type="submit"
-            className="login-btn"
+            className={styles.loginBtn}
             disabled={isLoading}
           >
             {isLoading ? 'Connexion...' : 'Se connecter'}

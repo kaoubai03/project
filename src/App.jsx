@@ -15,7 +15,8 @@ import HomePage from './pages/HomePage';
 import UserTypeSelection from './pages/UserTypeSelection';
 import SignupPatient from './pages/SignupPatient';
 import SignupDoctor from './pages/SignupDoctor';
-import Login from './pages/Login';
+import LoginPatient from './pages/LoginPatient';
+import LoginDoctor from './pages/LoginMedecin';
 import './App.css';
 
 // Pages protégées (utilisateurs)
@@ -30,6 +31,7 @@ import MessagerieP from './pages/MessagerieP';
 // Pages admin
 import AdminLogin from './components/layouts/Admins/AdminLogin';
 import AdminDashboard from './pages/Admins/AdminDashboard';
+import LoginMedecin from './pages/LoginMedecin';
 
 function App() {
   return (
@@ -46,9 +48,12 @@ function App() {
                 <Route path="/user-type" element={<UserTypeSelection mode="signup" />} />
                 <Route path="/signup-patient" element={<SignupPatient />} />
                 <Route path="/signup-doctor" element={<SignupDoctor />} />
-                <Route path="/login" element={<Navigate to="/login/selection" replace />} />
+                
                 <Route path="/login/selection" element={<UserTypeSelection mode="login" />} />
-                <Route path="/login/:userType" element={<Login />} />
+                <Route path="/login/:userType" element={<LoginPatient />} />
+                 <Route path="/login/:userType" element={<LoginMedecin />} />
+                <Route path="/login/patient" element={<LoginPatient />} />
+                <Route path="/login/doctor" element={<LoginMedecin />} />
               </Route>
 
               {/* ============================================ */}

@@ -1,6 +1,4 @@
-/* components/Admin/SidebarA.css */
-
-.admin-sidebar {
+.adminSidebar {
   width: 280px;
   height: 100vh;
   background-color: #2c3e50;
@@ -14,7 +12,11 @@
   transition: transform 0.3s ease;
 }
 
-.sidebar-header {
+.adminSidebar.open {
+  transform: translateX(0);
+}
+
+.sidebarHeader {
   padding: 1.5rem;
   display: flex;
   justify-content: space-between;
@@ -22,16 +24,16 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.admin-brand {
+.adminBrand {
   font-size: 1.2rem;
   font-weight: 600;
 }
 
-.admin-brand span {
+.adminBrand span {
   color: #3498db;
 }
 
-.close-sidebar {
+.closeSidebar {
   background: none;
   border: none;
   color: white;
@@ -39,7 +41,7 @@
   display: none;
 }
 
-.admin-profile {
+.adminProfile {
   padding: 1.5rem;
   display: flex;
   align-items: center;
@@ -47,7 +49,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.admin-avatar {
+.adminAvatar {
   width: 40px;
   height: 40px;
   background-color: #3498db;
@@ -58,34 +60,34 @@
   font-weight: bold;
 }
 
-.admin-info {
+.adminInfo {
   line-height: 1.4;
 }
 
-.admin-name {
+.adminName {
   margin: 0;
   font-weight: 500;
 }
 
-.admin-email {
+.adminEmail {
   margin: 0;
   font-size: 0.8rem;
   opacity: 0.8;
 }
 
-.sidebar-nav {
+.sidebarNav {
   flex: 1;
   padding: 1rem 0;
   overflow-y: auto;
 }
 
-.sidebar-nav ul {
+.sidebarNav ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.nav-link {
+.navLink {
   display: flex;
   align-items: center;
   padding: 0.8rem 1.5rem;
@@ -95,16 +97,16 @@
   position: relative;
 }
 
-.nav-link:hover {
+.navLink:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-.nav-link.active {
+.navLink.active {
   background-color: rgba(52, 152, 219, 0.2);
   color: white;
 }
 
-.nav-link.active::before {
+.navLink.active::before {
   content: '';
   position: absolute;
   left: 0;
@@ -114,26 +116,26 @@
   background-color: #3498db;
 }
 
-.nav-icon {
+.navIcon {
   margin-right: 1rem;
   display: flex;
 }
 
-.nav-text {
+.navText {
   flex: 1;
   font-size: 0.95rem;
 }
 
-.nav-chevron {
+.navChevron {
   opacity: 0.6;
 }
 
-.sidebar-footer {
+.sidebarFooter {
   padding: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.logout-btn {
+.logoutBtn {
   display: flex;
   align-items: center;
   width: 100%;
@@ -146,22 +148,18 @@
   transition: background-color 0.3s;
 }
 
-.logout-btn:hover {
+.logoutBtn:hover {
   background-color: rgba(231, 76, 60, 0.1);
   color: #e74c3c;
 }
 
 /* Responsive */
 @media (max-width: 992px) {
-  .admin-sidebar {
+  .adminSidebar {
     transform: translateX(-100%);
   }
 
-  .admin-sidebar.open {
-    transform: translateX(0);
-  }
-
-  .close-sidebar {
+  .closeSidebar {
     display: block;
   }
 }

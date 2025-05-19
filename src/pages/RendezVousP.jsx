@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, Search, PlusCircle, Filter, ChevronDown, Loader2, Calendar, X, Check } from 'lucide-react';
+import { Menu, Search, PlusCircle, Filter, ChevronDown, Loader2, Calendar, X, Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import SidebarP from '../components/layouts/sidebarP';
 import styles from './css/RendezVousP.module.css';
 
@@ -14,6 +14,8 @@ const RendezVousP = () => {
   const [specialiteFilter, setSpecialiteFilter] = useState('');
   const [formError, setFormError] = useState('');
   const [editingAppointment, setEditingAppointment] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const appointmentsPerPage = 5;
 
   const [formData, setFormData] = useState({
     medecin: '',
@@ -38,18 +40,42 @@ const RendezVousP = () => {
   const statusOptions = [
     { value: 'planifié', label: 'Planifié', icon: <Calendar size={16} /> },
     { value: 'confirmé', label: 'Confirmé', icon: <Check size={16} /> },
+    { value: 'réalisé', label: 'Réalisé', icon: <Check size={16} /> },
     { value: 'annulé', label: 'Annulé', icon: <X size={16} /> }
   ];
 
-  const heuresDisponibles = [
-    '09:00', '09:15', '09:30', '09:45',
-    '10:00', '10:15', '10:30', '10:45',
-    '11:00', '11:15', '11:30', '11:45',
-    '12:00', '12:15', '12:30', '12:45',
-    '13:00', '13:15', '13:30', '13:45',
-    '14:00', '14:15', '14:30', '14:45',
-    '15:00', '15:15', '15:30', '15:45'
-  ];
+  const generateAvailableHours = (date) => {
+    if (!date) return [];
+    const day = new Date(date).getDay();
+    const hours = [];
+
+    // Samedi: 9h-13h (pas de créneau à 13h)
+    if (day === 6) {
+      for (let h = 9; h < 13; h++) {
+        for (let m = 0; m < 60; m += 15) {
+          hours.push(`${h}:${m.toString().padStart(2, '0')}`);
+        }
+      }
+    } 
+    // Lundi-Vendredi: 9h-12h et 13h-16h (pas de créneau à 12h ni 16h)
+    else if (day >= 1 && day <= 5) {
+      // Matin: 9h-12h
+      for (let h = 9; h < 12; h++) {
+        for (let m = 0; m < 60; m += 15) {
+          hours.push(`${h}:${m.toString().padStart(2, '0')}`);
+        }
+      }
+      // Après-midi: 13h-16h
+      for (let h = 13; h < 16; h++) {
+        for (let m = 0; m < 60; m += 15) {
+          hours.push(`${h}:${m.toString().padStart(2, '0')}`);
+        }
+      }
+    }
+    return hours;
+  };
+
+  const [heuresDisponibles, setHeuresDisponibles] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -59,7 +85,7 @@ const RendezVousP = () => {
           id: 1,
           medecin: 'Dr. Dupont',
           specialite: 'Cardiologie',
-          date: '2025-06-15',
+          date: '2025-06-16', // Lundi
           heure: '09:30',
           status: 'planifié',
           notes: 'Contrôle annuel'
@@ -68,15 +94,35 @@ const RendezVousP = () => {
           id: 2,
           medecin: 'Dr. Martin',
           specialite: 'Dermatologie',
-          date: '2025-06-17',
+          date: '2025-06-17', // Mardi
           heure: '14:00',
-          status: 'planifié',
+          status: 'confirmé',
           notes: 'Examen de routine'
+        },
+        {
+          id: 3,
+          medecin: 'Dr. Legrand',
+          specialite: 'Généraliste',
+          date: '2025-06-15', // Samedi
+          heure: '10:00',
+          status: 'réalisé',
+          notes: 'Consultation générale'
         }
       ]);
       setLoading(false);
     }, 800);
   }, []);
+
+  useEffect(() => {
+    if (formData.date) {
+      const heures = generateAvailableHours(formData.date);
+      setHeuresDisponibles(heures);
+      // Réinitialiser l'heure si elle n'est plus disponible
+      if (formData.heure && !heures.includes(formData.heure)) {
+        setFormData(prev => ({ ...prev, heure: '' }));
+      }
+    }
+  }, [formData.date]);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);
@@ -87,24 +133,9 @@ const RendezVousP = () => {
   };
 
   const isDateDisabled = (date) => {
-    const day = new Date(date).getDay();
-    return day === 0;
-  };
-
-  const isTimeDisabled = (time, date) => {
     if (!date) return false;
-    
-    const selectedDate = new Date(date);
-    const day = selectedDate.getDay();
-    const hour = parseInt(time.split(':')[0]);
-    
-    if (day === 6) {
-      return hour < 9 || hour >= 13;
-    } else if (day >= 1 && day <= 5) {
-      return (hour < 9 || hour >= 12) && (hour < 13 || hour >= 16);
-    }
-    
-    return false;
+    const day = new Date(date).getDay();
+    return day === 0; // Dimanche
   };
 
   const isSlotAvailable = (date, time) => {
@@ -113,13 +144,17 @@ const RendezVousP = () => {
       appt.date === date && 
       appt.heure === time
     ).length;
-    
     return count < 2;
   };
 
   const handleCreateAppointment = (e) => {
     e.preventDefault();
     const { date, heure } = formData;
+
+    if (isDateDisabled(date)) {
+      setFormError("Les rendez-vous ne sont pas disponibles le dimanche.");
+      return;
+    }
 
     if (!isSlotAvailable(date, heure)) {
       setFormError("Ce créneau est déjà complet. Veuillez choisir un autre horaire.");
@@ -145,6 +180,11 @@ const RendezVousP = () => {
   const handleUpdateAppointment = (e) => {
     e.preventDefault();
     const { date, heure } = formData;
+
+    if (isDateDisabled(date)) {
+      setFormError("Les rendez-vous ne sont pas disponibles le dimanche.");
+      return;
+    }
 
     if (!isSlotAvailable(date, heure)) {
       setFormError("Ce créneau est déjà complet. Veuillez choisir un autre horaire.");
@@ -176,6 +216,10 @@ const RendezVousP = () => {
     }, 300);
   };
 
+  const markAsCompleted = (appointmentId) => {
+    handleStatusChange(appointmentId, 'réalisé');
+  };
+
   const handleEditAppointment = (appointment) => {
     setEditingAppointment(appointment);
     setFormData({
@@ -204,9 +248,25 @@ const RendezVousP = () => {
     return searchMatch && specialiteMatch && tabMatch;
   });
 
+  // Pagination logic
+  const indexOfLastAppointment = currentPage * appointmentsPerPage;
+  const indexOfFirstAppointment = indexOfLastAppointment - appointmentsPerPage;
+  const currentAppointments = filteredAppointments.slice(indexOfFirstAppointment, indexOfLastAppointment);
+  const totalPages = Math.ceil(filteredAppointments.length / appointmentsPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   const formatDate = (dateStr) => {
     const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
     return new Date(dateStr).toLocaleDateString('fr-FR', options);
+  };
+
+  const getScheduleInfo = (date) => {
+    if (!date) return '';
+    const day = new Date(date).getDay();
+    if (day === 6) return "Samedi : 9h-13h (fermeture à 13h)";
+    if (day >= 1 && day <= 5) return "Lundi-Vendredi : 9h-12h et 13h-16h (fermé 12h-13h)";
+    return "Fermé le dimanche";
   };
 
   return (
@@ -286,8 +346,10 @@ const RendezVousP = () => {
                   required
                   className={isDateDisabled(formData.date) ? styles.disabledDate : ''}
                 />
-                {isDateDisabled(formData.date) && (
-                  <p className={styles.dateWarning}>Les rendez-vous ne sont pas disponibles le dimanche</p>
+                {formData.date && (
+                  <p className={isDateDisabled(formData.date) ? styles.dateWarning : styles.scheduleInfo}>
+                    {getScheduleInfo(formData.date)}
+                  </p>
                 )}
               </div>
               <div className={styles.formGroup}>
@@ -297,12 +359,11 @@ const RendezVousP = () => {
                   value={formData.heure}
                   onChange={handleInputChange}
                   required
-                  disabled={!formData.date}
+                  disabled={!formData.date || isDateDisabled(formData.date)}
                 >
                   <option value="">Sélectionnez une heure</option>
                   {heuresDisponibles.map((heure) => {
-                    const isDisabled = isTimeDisabled(heure, formData.date) || 
-                                     !isSlotAvailable(formData.date, heure);
+                    const isDisabled = !isSlotAvailable(formData.date, heure);
                     return (
                       <option 
                         key={heure} 
@@ -311,11 +372,16 @@ const RendezVousP = () => {
                         className={isDisabled ? styles.disabledTime : ''}
                       >
                         {heure}
-                        {!isSlotAvailable(formData.date, heure) && ' (Complet)'}
+                        {isDisabled && ' (Complet)'}
                       </option>
                     );
                   })}
                 </select>
+                {formData.date && !isDateDisabled(formData.date) && (
+                  <p className={styles.timeNote}>
+                    Créneaux disponibles toutes les 15 minutes
+                  </p>
+                )}
               </div>
               <div className={`${styles.formGroup} ${styles.fullWidth}`}>
                 <label>Notes</label>
@@ -376,21 +442,30 @@ const RendezVousP = () => {
         <div className={styles.tabs}>
           <button
             className={activeTab === 'upcoming' ? styles.active : ''}
-            onClick={() => setActiveTab('upcoming')}
+            onClick={() => {
+              setActiveTab('upcoming');
+              setCurrentPage(1);
+            }}
             disabled={loading}
           >
             À venir
           </button>
           <button
             className={activeTab === 'history' ? styles.active : ''}
-            onClick={() => setActiveTab('history')}
+            onClick={() => {
+              setActiveTab('history');
+              setCurrentPage(1);
+            }}
             disabled={loading}
           >
             Historique
           </button>
           <button
             className={activeTab === 'cancelled' ? styles.active : ''}
-            onClick={() => setActiveTab('cancelled')}
+            onClick={() => {
+              setActiveTab('cancelled');
+              setCurrentPage(1);
+            }}
             disabled={loading}
           >
             Annulés
@@ -403,10 +478,10 @@ const RendezVousP = () => {
               <Loader2 className={styles.spinIcon} size={32} />
               <p>Chargement...</p>
             </div>
-          ) : filteredAppointments.length === 0 ? (
+          ) : currentAppointments.length === 0 ? (
             <p className={styles.noAppointments}>Aucun rendez-vous trouvé.</p>
           ) : (
-            filteredAppointments.map(appt => (
+            currentAppointments.map(appt => (
               <div key={appt.id} className={`${styles.appointmentCard} ${styles[appt.status]}`}>
                 <div className={styles.cardHeader}>
                   <div>
@@ -417,7 +492,7 @@ const RendezVousP = () => {
                     </span>
                   </div>
                   <div className={styles.cardActions}>
-                    {appt.status !== 'annulé' && (
+                    {appt.status === 'planifié' || appt.status === 'confirmé' ? (
                       <>
                         <button 
                           className={styles.editBtn}
@@ -426,6 +501,13 @@ const RendezVousP = () => {
                         >
                           Reprogrammer
                         </button>
+                       {/* <button
+                          className={styles.completeBtn}
+                          onClick={() => markAsCompleted(appt.id)}
+                          disabled={loading}
+                        >
+                          Marquer comme réalisé
+                        </button> */}
                         <select
                           value={appt.status}
                           onChange={(e) => handleStatusChange(appt.id, e.target.value)}
@@ -439,7 +521,7 @@ const RendezVousP = () => {
                           ))}
                         </select>
                       </>
-                    )}
+                    ) : null}
                   </div>
                 </div>
                 <div className={styles.cardDetails}>
@@ -451,6 +533,34 @@ const RendezVousP = () => {
             ))
           )}
         </div>
+
+        {filteredAppointments.length > appointmentsPerPage && (
+          <div className={styles.pagination}>
+            <button
+              onClick={() => paginate(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={styles.paginationButton}
+            >
+              <ChevronLeft size={16} />
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                key={i}
+                onClick={() => paginate(i + 1)}
+                className={`${styles.paginationButton} ${currentPage === i + 1 ? styles.activePage : ''}`}
+              >
+                {i + 1}
+              </button>
+            ))}
+            <button
+              onClick={() => paginate(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={styles.paginationButton}
+            >
+              <ChevronRight size={16} />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
