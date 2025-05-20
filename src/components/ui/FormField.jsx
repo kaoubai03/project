@@ -1,5 +1,5 @@
 import React from 'react';
-import './FormField.css';
+import styles from './FormField.module.css';
 
 const FormField = ({
   label,
@@ -12,13 +12,13 @@ const FormField = ({
   ...props
 }) => {
   return (
-    <div className="form-field">
+    <div className={styles.formField}>
       <label 
         htmlFor={id} 
-        className="form-label"
+        className={styles.formLabel}
       >
         {label}
-        {required && <span className="required-indicator">*</span>}
+        {required && <span className={styles.requiredIndicator}>*</span>}
       </label>
       
       {children || (
@@ -27,8 +27,8 @@ const FormField = ({
           name={id}
           type={type}
           className={`
-            form-input
-            ${error ? 'input-error' : ''}
+            ${styles.formInput}
+            ${error ? styles.inputError : ''}
             ${className}
           `}
           aria-invalid={error ? 'true' : 'false'}
@@ -37,7 +37,7 @@ const FormField = ({
       )}
       
       {error && (
-        <p className="error-message" id={`${id}-error`}>
+        <p className={styles.errorMessage} id={`${id}-error`}>
           {error}
         </p>
       )}

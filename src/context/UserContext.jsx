@@ -1,106 +1,102 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
 
-  // Mock authentication functions
-  const login = async (email, password) => {
+  useEffect(() => {
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    } else {
+      delete axios.defaults.headers.common['Authorization'];
+    }
+  }, [token]);
+
+  // 🔐 Connexion
+const login = async (email, password, userType) => {
+  let url;
+  if (userType === 'medecin' || userType === 'doctor') {
+    url = 'http://localhost:5000/api/medecin/login';
+  } else if (userType === 'patient') {
+    url = 'http://localhost:5000/api/auth/login/patient';
+  } else {
+    throw new Error("Type d'utilisateur inconnu");
+  }
+
+  try {
+    const response = await axios.post(url, { email, password });
+    const { token, user } = response.data;
+    localStorage.setItem('token', token);
+    setToken(token);
+    setUser(user);
+    return response.data;
+  } catch (error) {
+    console.error("Erreur lors de la connexion :", error);
+    throw error;
+  }
+};
+
+ 
+
+  // 👤 Inscription patient
+  const registerPatient = async (patientData) => {
     try {
-      // In a real app, this would be an API call
-      console.log('Logging in with:', email, password);
-      
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // For demo, create a mock user
-      const mockUser = {
-        id: '123456',
-        email,
-        fullName: 'Demo User',
-        role: email.includes('doctor') ? 'doctor' : 'patient',
-        isVerified: email.includes('doctor') ? false : true,
-        ...(email.includes('doctor') ? { professionalNumber: 'DOC12345' } : {})
-      };
-      
-      setUser(mockUser);
-      return mockUser;
+      const response = await axios.post('http://localhost:5000/api/patient/', patientData);
+      const { token, user } = response.data;
+      localStorage.setItem('token', token);
+      setToken(token);
+      setUser(user);
+      return response.data;
     } catch (error) {
-      console.error('Login error:', error);
       throw error;
     }
   };
 
+  // 👨‍⚕️ Inscription médecin
+const registerDoctor = async (doctorData) => {
+  try {
+    const response = await axios.post(
+      'http://localhost:5000/api/medecin/signup',
+      doctorData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+    );
+
+    const { token, user } = response.data;
+    localStorage.setItem('token', token);
+    setToken(token);
+    setUser(user);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+  // 🚪 Déconnexion
   const logout = () => {
+    localStorage.removeItem('token');
+    setToken(null);
     setUser(null);
   };
 
-  const registerPatient = async (userData) => {
-    try {
-      console.log('Registering patient:', userData);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const mockUser = {
-        id: Math.random().toString(36).slice(2),
-        email: userData.email,
-        fullName: userData.fullName,
-        role: 'patient',
-        isVerified: true
-      };
-      
-      setUser(mockUser);
-      return mockUser;  
-    } catch (error) {
-      console.error('Registration error:', error);
-      throw error;
-    }
-  };
-
-  const registerDoctor = async (userData) => {
-    try {
-      console.log('Registering doctor:', userData);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const mockUser = {
-        id: Math.random().toString(36).slice(2),
-        email: userData.email,
-        fullName: userData.fullName,
-        role: 'doctor',
-        isVerified: false,
-        professionalNumber: userData.professionalNumber,
-        documentUrl: userData.document ? URL.createObjectURL(userData.document) : undefined
-      };
-      
-      setUser(mockUser);
-      return mockUser;
-    } catch (error) {
-      console.error('Registration error:', error);
-      throw error;
-    }
-  };
-
   return (
-    <UserContext.Provider
-      value={{
-        user,
-        setUser,
-        isAuthenticated: !!user,
-        login,
-        logout,
-        registerPatient,
-        registerDoctor,
-      }}
-    >
+    <UserContext.Provider value={{
+      user,
+      token,
+      login,
+      logout,
+      registerPatient,
+      registerDoctor,
+    }}>
       {children}
     </UserContext.Provider>
   );
 };
 
-export const useUser = () => {
-  const context = useContext(UserContext);
-  if (context === undefined) {
-    throw new Error('useUser must be used within a UserProvider');
-  }
-  return context;
-};
+export const useUser = () => useContext(UserContext);

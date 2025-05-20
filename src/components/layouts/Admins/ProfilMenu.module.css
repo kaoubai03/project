@@ -1,0 +1,176 @@
+.profileMenuContainer {
+  position: relative;
+}
+
+.profileTrigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(to right, rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.05));
+  border: 1px solid rgba(52, 152, 219, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.profileTrigger:hover {
+  background: linear-gradient(to right, rgba(52, 152, 219, 0.15), rgba(52, 152, 219, 0.1));
+}
+
+.adminIcon {
+  display: flex;
+  color: #3498db;
+}
+
+.adminZone {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.chevron {
+  color: #7f8c8d;
+  transition: transform 0.3s ease;
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+.profileDropdown {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  right: 0;
+  width: 300px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 1000;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: linear-gradient(to right, #2c3e50, #34495e);
+  color: white;
+}
+
+.profileAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 3px 8px rgba(52, 152, 219, 0.3);
+}
+
+.profileInfo h4 {
+  margin: 0 0 0.25rem;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.profileInfo p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.profileDetails {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.profileDetailItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.profileDetailItem:last-child {
+  margin-bottom: 0;
+}
+
+.detailLabel {
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+.detailValue {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.statusActive {
+  color: #2ecc71;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.statusActive::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #2ecc71;
+}
+
+.profileActions {
+  padding: 1rem 1.25rem;
+}
+
+.profileActionBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #2c3e50;
+  text-align: left;
+}
+
+.profileActionBtn:last-child {
+  margin-bottom: 0;
+}
+
+.profileActionBtn:hover {
+  background-color: rgba(236, 240, 241, 0.8);
+}
+
+.profileActionBtn.logout {
+  color: #e74c3c;
+}
+
+.profileActionBtn.logout:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+}

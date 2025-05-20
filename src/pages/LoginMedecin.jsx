@@ -2,25 +2,46 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, User, Lock, ChevronLeft, Stethoscope } from 'lucide-react';
+import { useUser } from '../context/UserContext';
 import styles from './css/LoginMedecin.module.css';
 
 const LoginMedecin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const { login } = useUser();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Logique de connexion médecin
-    console.log({ email, password });
+    const validateForm = () => {
+    const newErrors = {};
+    if (!email) newErrors.email = 'L\'email est requis';
+    if (!password) newErrors.password = 'Le mot de passe est requis';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-     navigate('/dashboard/doctor');
-    // Remplace cette logique par l'appel à ton API de connexion
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+    try {
+      await login(email, password, 'doctor');
+      navigate('/dashboard/doctor');
+    } catch (error) {
+      console.error("Erreur lors de la connexion médecin :", error);
+      setErrors({
+        form: error.response?.data?.error || "Échec de la connexion. Vérifiez vos identifiants."
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
 
@@ -39,6 +60,12 @@ const LoginMedecin = () => {
           <h2>Connexion Médecin</h2>
           <p>Accédez à votre espace professionnel</p>
         </div>
+
+        {errors.form && (
+        <div className="error-message">
+          {errors.form}
+        </div>
+      )}
 
         <form onSubmit={handleSubmit} className={styles.loginForm}>
           <div className={styles.inputGroup}>

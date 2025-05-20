@@ -2,25 +2,47 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, User, Lock, ChevronLeft } from 'lucide-react';
+import { useUser } from '../context/UserContext';
 import styles from './css/LoginPatient.module.css';
 
 const LoginPatient = () => {
+    const navigate = useNavigate();
+    const { login } = useUser();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
+  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e) => {
+    const validateForm = () => {
+    const newErrors = {};
+    if (!email) newErrors.email = 'L\'email est requis';
+    if (!password) newErrors.password = 'Le mot de passe est requis';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Logique de connexion patient
-    console.log({ email, password });
+    if (!validateForm()) return;
 
-        navigate('/dashboard/patient');
-    // Remplace cette logique par l'appel à ton API de connexion
+    setIsSubmitting(true);
+    try {
+      await login(email, password, 'patient');
+      navigate('/dashboard/patient');
+    } catch (error) {
+      console.error("Erreur lors de la connexion patient :", error);
+      setErrors({
+        form: error.response?.data?.error || "Échec de la connexion. Vérifiez vos identifiants."
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -34,6 +56,12 @@ const LoginPatient = () => {
           <h2>Connexion Patient</h2>
           <p>Accédez à votre espace santé personnel</p>
         </div>
+
+        {errors.form && (
+        <div className="error-message">
+          {errors.form}
+        </div>
+      )}
 
         <form onSubmit={handleSubmit} className={styles.loginForm}>
           <div className={styles.inputGroup}>

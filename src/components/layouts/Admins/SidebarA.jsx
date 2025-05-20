@@ -1,23 +1,29 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useAdmin } from '../../../context/AdminContext';
 import { 
-  Home, Users, Calendar, MessageSquare, Menu, 
-  FileText, Settings, LogOut, ChevronRight, X 
+  Home, 
+  Users, 
+  Calendar, 
+  MessageSquare, 
+  FileText, 
+  Settings, 
+  LogOut, 
+  ChevronRight, 
+  X 
 } from 'lucide-react';
 import styles from './SidebarA.module.css';
 
 const SidebarA = ({ sidebarOpen, closeSidebar }) => {
-  const { logoutAdmin, admin } = useAdmin();
-  const navigate = useNavigate();
-
+  const admin = {
+    name: 'Dr. Admin',
+    email: 'admin@ehealth.com'
+  };
+  
   const handleLogout = () => {
-    logoutAdmin();
-    navigate('/admin/login');
-    closeSidebar();
+    console.log('Logout clicked');
   };
 
   const menuItems = [
+    { icon: <Home size={20} />, label: "Dashboard", path: "/admin" },
     { icon: <Users size={20} />, label: "Patients", path: "/admin/patients" },
     { icon: <Users size={20} />, label: "Médecins", path: "/admin/medecins" },
     { icon: <Calendar size={20} />, label: "Rendez-Vous", path: "/admin/rendezvous" },
@@ -31,18 +37,22 @@ const SidebarA = ({ sidebarOpen, closeSidebar }) => {
         <div className={styles.adminBrand}>
           <span>Admin</span>E-Health
         </div>
-        <button className={styles.closeSidebar} onClick={closeSidebar}>
+        <button 
+          className={styles.closeSidebar} 
+          onClick={closeSidebar} 
+          aria-label="Close sidebar"
+        >
           <X size={20} />
         </button>
       </div>
 
       <div className={styles.adminProfile}>
         <div className={styles.adminAvatar}>
-          {admin?.name?.charAt(0) || 'A'}
+          {admin.name ? admin.name.charAt(0) : 'A'}
         </div>
         <div className={styles.adminInfo}>
-          <p className={styles.adminName}>{admin?.name || 'Administrateur'}</p>
-          <p className={styles.adminEmail}>{admin?.email || 'admin@ehealth.com'}</p>
+          <p className={styles.adminName}>{admin.name || 'Administrateur'}</p>
+          <p className={styles.adminEmail}>{admin.email || 'admin@ehealth.com'}</p>
         </div>
       </div>
 
@@ -50,17 +60,20 @@ const SidebarA = ({ sidebarOpen, closeSidebar }) => {
         <ul>
           {menuItems.map((item, index) => (
             <li key={index}>
-              <NavLink
-                to={item.path}
-                className={({ isActive }) => 
-                  `${styles.navLink} ${isActive ? styles.active : ''}`
-                }
-                onClick={closeSidebar}
+              <a 
+                href={item.path}
+                className={index === 0 ? styles.active : ''}
+                onClick={(e) => {
+                  if (index !== 0) {
+                    e.preventDefault();
+                  }
+                  closeSidebar();
+                }}
               >
                 <span className={styles.navIcon}>{item.icon}</span>
                 <span className={styles.navText}>{item.label}</span>
                 <ChevronRight size={16} className={styles.navChevron} />
-              </NavLink>
+              </a>
             </li>
           ))}
         </ul>

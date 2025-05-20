@@ -1,7 +1,7 @@
 .adminSidebar {
   width: 280px;
   height: 100vh;
-  background-color: #2c3e50;
+  background: linear-gradient(to bottom, #2c3e50, #1a252f);
   color: white;
   display: flex;
   flex-direction: column;
@@ -10,6 +10,7 @@
   top: 0;
   z-index: 100;
   transition: transform 0.3s ease;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .adminSidebar.open {
@@ -27,10 +28,17 @@
 .adminBrand {
   font-size: 1.2rem;
   font-weight: 600;
+  background: linear-gradient(to right, #fff, #ecf0f1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .adminBrand span {
   color: #3498db;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
 }
 
 .closeSidebar {
@@ -38,7 +46,19 @@
   border: none;
   color: white;
   cursor: pointer;
-  display: none;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeSidebar:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .adminProfile {
@@ -50,14 +70,16 @@
 }
 
 .adminAvatar {
-  width: 40px;
-  height: 40px;
-  background-color: #3498db;
-  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  font-size: 1.2rem;
+  box-shadow: 0 3px 8px rgba(52, 152, 219, 0.3);
 }
 
 .adminInfo {
@@ -66,7 +88,7 @@
 
 .adminName {
   margin: 0;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .adminEmail {
@@ -87,7 +109,11 @@
   margin: 0;
 }
 
-.navLink {
+.sidebarNav li {
+  margin-bottom: 0.25rem;
+}
+
+.sidebarNav a {
   display: flex;
   align-items: center;
   padding: 0.8rem 1.5rem;
@@ -95,30 +121,34 @@
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
+  border-radius: 0 30px 30px 0;
+  margin-right: 1rem;
 }
 
-.navLink:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.navLink.active {
-  background-color: rgba(52, 152, 219, 0.2);
+.sidebarNav a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
   color: white;
 }
 
-.navLink.active::before {
+.sidebarNav a.active {
+  background: linear-gradient(to right, rgba(52, 152, 219, 0.2), rgba(52, 152, 219, 0.05));
+  color: white;
+}
+
+.sidebarNav a.active::before {
   content: '';
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   width: 4px;
-  background-color: #3498db;
+  background: linear-gradient(to bottom, #3498db, #2980b9);
 }
 
 .navIcon {
   margin-right: 1rem;
   display: flex;
+  opacity: 0.9;
 }
 
 .navText {
@@ -128,6 +158,12 @@
 
 .navChevron {
   opacity: 0.6;
+  transition: transform 0.3s ease;
+}
+
+.sidebarNav a:hover .navChevron {
+  transform: translateX(3px);
+  opacity: 0.9;
 }
 
 .sidebarFooter {
@@ -145,11 +181,16 @@
   padding: 0.8rem 1rem;
   cursor: pointer;
   font-size: 0.95rem;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  border-radius: 6px;
 }
 
 .logoutBtn:hover {
-  background-color: rgba(231, 76, 60, 0.1);
+  background-color: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+.logoutBtn:hover .navIcon {
   color: #e74c3c;
 }
 
@@ -157,9 +198,14 @@
 @media (max-width: 992px) {
   .adminSidebar {
     transform: translateX(-100%);
+    box-shadow: none;
   }
 
   .closeSidebar {
-    display: block;
+    display: flex;
+  }
+  
+  .adminSidebar.open {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   }
 }

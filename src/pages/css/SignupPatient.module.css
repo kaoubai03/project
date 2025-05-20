@@ -1,0 +1,141 @@
+.signupContainer {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 32px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.backButton {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 24px;
+}
+
+.backLink {
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: #0d9488;
+}
+
+.backIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.iconContainer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: #f0fdfa;
+  border-radius: 9999px;
+  margin-bottom: 16px;
+}
+
+.userIcon {
+  height: 24px;
+  width: 24px;
+  color: #0d9488;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.header p {
+  color: #6b7280;
+}
+
+.errorMessage {
+  margin-bottom: 16px;
+  padding: 12px;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  color: #dc2626;
+  font-size: 14px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.passwordField {
+  position: relative;
+}
+
+.togglePassword {
+  position: absolute;
+  right: 10px;
+  top: 29px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.togglePassword:hover {
+  color: #0d9488;
+  background-color: #f0fdf4;
+}
+
+.selectField {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.selectField:focus {
+  outline: none;
+  border-color: #0d9488;
+  box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.2);
+}
+
+.selectField.error {
+  border-color: #fca5a5;
+}
+
+.submitButton {
+  padding-top: 8px;
+}
+
+.loginLink {
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 16px;
+}
+
+.loginLink a {
+  color: #0d9488;
+  text-decoration: none;
+}
+
+.loginLink a:hover {
+  text-decoration: underline;
+}
